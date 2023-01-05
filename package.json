@@ -1,0 +1,76 @@
+{
+  "name": "rrd-ui",
+  "version": "1.0.0",
+  "description": "RedRockDigital's frontend framework",
+  "repository": "https://github.com/RedRockDigital/rrd-ui",
+  "author": "RedRockDigital",
+  "license": "MIT",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "lint": "eslint --ext '.jsx' ./"
+  },
+  "devDependencies": {
+    "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/react": "^13.4.0",
+    "axios": "^0.27.2",
+    "eslint": "^8.0.1",
+    "eslint-config-standard": "^17.0.0",
+    "eslint-plugin-import": "^2.25.2",
+    "eslint-plugin-n": "^15.0.0",
+    "eslint-plugin-promise": "^6.0.0",
+    "eslint-plugin-react": "^7.31.10",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "laravel-vite-plugin": "^0.5.0",
+    "lodash": "^4.17.19",
+    "postcss": "^8.4.16",
+    "vite": "^3.0.0",
+    "vitest": "^0.25.8"
+  },
+  "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^6.1.2",
+    "@fortawesome/free-brands-svg-icons": "^6.1.2",
+    "@fortawesome/free-solid-svg-icons": "^6.1.2",
+    "@fortawesome/react-fontawesome": "^0.2.0",
+    "@tailwindcss/typography": "^0.5.8",
+    "@vitejs/plugin-react": "^2.0.0",
+    "autoprefixer": "^10.4.8",
+    "fathom-client": "^3.5.0",
+    "google-map-react": "^2.2.0",
+    "laravel-echo": "^1.14.2",
+    "laravel-vapor": "^0.6.0",
+    "luxon": "^3.0.1",
+    "prop-types": "^15.8.1",
+    "pusher-js": "^7.5.0",
+    "rc-slider": "^10.0.1",
+    "react": "^18.2.0",
+    "react-datepicker": "^4.8.0",
+    "react-dom": "^18.2.0",
+    "react-dropzone": "^14.2.2",
+    "react-google-autocomplete": "^2.7.0",
+    "react-paginate": "^8.1.3",
+    "react-router-dom": "^6.3.0",
+    "react-select": "^5.6.0",
+    "react-timeago": "^7.1.0",
+    "react-toastify": "^9.1.1",
+    "sass": "^1.54.4",
+    "tailwindcss": "^3.1.8"
+  },
+  "resolutions": {
+    "rollup": "2.74.1"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "files": [
+    "dist"
+  ],
+  "main": "./dist/rrd-ui.umd.js",
+  "module": "./dist/rrd-ui.es.js",
+  "exports": {
+    ".": {
+      "import": "./dist/rrd-ui.es.js",
+      "require": "./dist/rrd-ui.umd.js"
+    }
+  }
+}

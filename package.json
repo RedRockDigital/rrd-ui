@@ -1,6 +1,6 @@
 {
-  "name": "rrd-ui",
-  "version": "1.0.0",
+  "name": "@redrockdigital/rrd-ui",
+  "version": "1.0.7",
   "description": "RedRockDigital's frontend framework",
   "repository": "https://github.com/RedRockDigital/rrd-ui",
   "author": "RedRockDigital",
@@ -11,8 +11,15 @@
     "lint": "eslint --ext '.jsx' ./"
   },
   "devDependencies": {
+    "@fortawesome/fontawesome-svg-core": "^6.1.2",
+    "@fortawesome/free-brands-svg-icons": "^6.1.2",
+    "@fortawesome/free-solid-svg-icons": "^6.1.2",
+    "@fortawesome/react-fontawesome": "^0.2.0",
+    "@tailwindcss/typography": "^0.5.8",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
+    "@vitejs/plugin-react": "^2.0.0",
+    "autoprefixer": "^10.4.8",
     "axios": "^0.27.2",
     "eslint": "^8.0.1",
     "eslint-config-standard": "^17.0.0",
@@ -21,40 +28,25 @@
     "eslint-plugin-promise": "^6.0.0",
     "eslint-plugin-react": "^7.31.10",
     "eslint-plugin-react-hooks": "^4.6.0",
-    "laravel-vite-plugin": "^0.5.0",
-    "lodash": "^4.17.19",
-    "postcss": "^8.4.16",
-    "vite": "^3.0.0",
-    "vitest": "^0.25.8"
-  },
-  "dependencies": {
-    "@fortawesome/fontawesome-svg-core": "^6.1.2",
-    "@fortawesome/free-brands-svg-icons": "^6.1.2",
-    "@fortawesome/free-solid-svg-icons": "^6.1.2",
-    "@fortawesome/react-fontawesome": "^0.2.0",
-    "@tailwindcss/typography": "^0.5.8",
-    "@vitejs/plugin-react": "^2.0.0",
-    "autoprefixer": "^10.4.8",
     "fathom-client": "^3.5.0",
     "google-map-react": "^2.2.0",
-    "laravel-echo": "^1.14.2",
     "laravel-vapor": "^0.6.0",
-    "luxon": "^3.0.1",
+    "laravel-vite-plugin": "^0.5.0",
+    "postcss": "^8.4.16",
     "prop-types": "^15.8.1",
-    "pusher-js": "^7.5.0",
-    "rc-slider": "^10.0.1",
     "react": "^18.2.0",
-    "react-datepicker": "^4.8.0",
     "react-dom": "^18.2.0",
-    "react-dropzone": "^14.2.2",
-    "react-google-autocomplete": "^2.7.0",
-    "react-paginate": "^8.1.3",
-    "react-router-dom": "^6.3.0",
-    "react-select": "^5.6.0",
+    "react-router-dom": "^6.6.1",
     "react-timeago": "^7.1.0",
     "react-toastify": "^9.1.1",
     "sass": "^1.54.4",
-    "tailwindcss": "^3.1.8"
+    "tailwindcss": "^3.1.8",
+    "vite": "^3.0.0",
+    "vitest": "^0.25.8"
+  },
+  "peerDependencies": {
+    "react": ">=16",
+    "react-dom": ">=16"
   },
   "resolutions": {
     "rollup": "2.74.1"
@@ -71,6 +63,24 @@
     ".": {
       "import": "./dist/rrd-ui.es.js",
       "require": "./dist/rrd-ui.umd.js"
+    },
+    "./dist/style.css": {
+      "import": "./dist/style.css",
+      "require": "./dist/style.css"
     }
+  },
+  "source": "./src/index.js",
+  "dependencies": {
+    "@sentry/react": "^7.29.0",
+    "laravel-echo": "^1.14.2",
+    "lodash": "^4.17.21",
+    "luxon": "^3.2.1",
+    "pusher-js": "^8.0.0",
+    "rc-slider": "^10.1.0",
+    "react-datepicker": "^4.8.0",
+    "react-dropzone": "^14.2.3",
+    "react-google-autocomplete": "^2.7.1",
+    "react-paginate": "^8.1.4",
+    "react-select": "^5.7.0"
   }
 }

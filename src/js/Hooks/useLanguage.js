@@ -1,13 +1,14 @@
 import { useState, useEffect, useCallback } from "react";
 import isEmpty from "lodash/isEmpty";
 
-// import lang from "@/Config/lang";
-
-const lang = {};
+import useConfig from "@/Hooks/useConfig";
 
 const useLanguage = () => {
+    const { getConfig } = useConfig();
     const [language, setLanguage] = useState(null);
     const [content, setContent] = useState(null);
+
+    const languages = getConfig("languages");
 
     useEffect(() => {
         if (!language) {
@@ -25,7 +26,7 @@ const useLanguage = () => {
     }, [language]);
 
     const handleChangeLanguage = (languageCode) => {
-        if (!languagesSupported()?.find(l => l.code === languageCode)) {
+        if (!languages?.find(l => l.code === languageCode)) {
             return console.error(`Unsupported language chosen "${languageCode}"`);
         }
 
@@ -35,7 +36,7 @@ const useLanguage = () => {
     };
 
     const getLanguageConfig = (languageCode) => {
-        const languageConfig = languagesSupported().find(l => l.code === languageCode);
+        const languageConfig = languages?.find(l => l.code === languageCode);
 
         if (!languageConfig) {
             console.error(`Unsupported language chosen "${languageCode}"`);
@@ -45,10 +46,8 @@ const useLanguage = () => {
         return languageConfig;
     };
 
-    const languagesSupported = () => lang;
-
     const loadContent = async (config) => {
-        const request = await import(`../Language/${config?.fileName}.js` /* @vite-ignore */);
+        const request = await import(config?.fileName /* @vite-ignore */);
 
         if (request?.default) {
             setContent(request.default);
@@ -94,8 +93,8 @@ const useLanguage = () => {
 
     return {
         c,
+        languages,
         handleChangeLanguage,
-        languagesSupported,
         currentLanguage,
     };
 };

@@ -1,5 +1,6 @@
 import useAuth from "./useAuth";
 import useAxiosApi from "./useAxiosApi";
+import useConfig from "./useConfig";
 import useFeatureFlags from "./useFeatureFlags";
 import useTeamSwitcher from "./useTeamSwitcher";
 import useForm from "./useForm";
@@ -15,6 +16,7 @@ import useVapor from "./useVapor";
 export {
     useAuth,
     useAxiosApi,
+    useConfig,
     useFeatureFlags,
     useForm,
     useLanguage,

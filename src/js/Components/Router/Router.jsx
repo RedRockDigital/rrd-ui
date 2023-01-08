@@ -3,30 +3,38 @@ import * as Fathom from "fathom-client";
 import PropTypes from "prop-types";
 import { Routes, Route, useLocation } from "react-router-dom";
 
-const Router = ({ routes, defaultRoute }) => {
+import { useConfig } from "@/Hooks";
+
+const Router = () => {
+    const { getConfig } = useConfig();
+
+    const routes = getConfig("routes");
+    const defaultRoute = getConfig("defaultRoute");
+
     return (
         <ScrollToTop>
             <AnalyticsWrapper>
                 <Routes>
-                    {routes.map((route, key) => (
-                        <Route
-                            key={key}
-                            path={route.path}
-                            element={
-                                <RenderRouteThroughGuard
-                                    guards={route.guards ?? []}
-                                    key={key}
-                                >
-                                    <route.component />
-                                </RenderRouteThroughGuard>
-                            }
-                        />
-                    ))}
+                    {routes
+                        .filter(route => route.component)
+                        .map((route, key) => (
+                            <Route
+                                key={key}
+                                path={route.path}
+                                element={
+                                    <RenderRouteThroughGuard>
+                                        <route.component />
+                                    </RenderRouteThroughGuard>
+                                }
+                            />
+                        ))}
 
-                    <Route
-                        path="*"
-                        element={defaultRoute}
-                    />
+                    {defaultRoute && (
+                        <Route
+                            path="*"
+                            element={defaultRoute}
+                        />
+                    )}
                 </Routes>
             </AnalyticsWrapper>
         </ScrollToTop>
@@ -46,7 +54,11 @@ const ScrollToTop = ({ children }) => {
         window.scrollTo(0, 0);
     }, [location]);
 
-    return children;
+    return (
+        <>
+            {children}
+        </>
+    );
 };
 
 ScrollToTop.propTypes = {
@@ -71,7 +83,11 @@ const AnalyticsWrapper = ({ children }) => {
         }
     }, [location]);
 
-    return children;
+    return (
+        <>
+            {children}
+        </>
+    );
 };
 
 AnalyticsWrapper.propTypes = {
@@ -82,25 +98,32 @@ AnalyticsWrapper.propTypes = {
 };
 
 const RenderRouteThroughGuard = ({ children, guards: routeGuards, previousGuard = false }) => {
-    if (routeGuards.length === 0) {
-        return children;
-    }
+    return (
+        <>
+            {children}
+        </>
+    );
 
-    let guard = null;
-
-    if (previousGuard !== false) {
-        const lastGuardIndex = routeGuards.indexOf(previousGuard);
-        guard = routeGuards[lastGuardIndex + 1];
-    } else {
-        guard = routeGuards[0];
-    }
-
-    const guardParts = guard.split(":"); // 0 is the guard, 1 is comma separated parameters
-    const guardToCall = guardParts[0];
-    const guardParameters = guardParts[1] ? guardParts[1].split(",") : [];
-
-    const Component = guards[guardToCall];
-    const hasMoreGuards = routeGuards.length > (routeGuards.indexOf(guard) + 1);
+    // console.log(guards);
+    // if (routeGuards.length === 0) {
+    //     return children;
+    // }
+    //
+    // let guard = null;
+    //
+    // if (previousGuard !== false) {
+    //     const lastGuardIndex = routeGuards.indexOf(previousGuard);
+    //     guard = routeGuards[lastGuardIndex + 1];
+    // } else {
+    //     guard = routeGuards[0];
+    // }
+    //
+    // const guardParts = guard.split(":"); // 0 is the guard, 1 is comma separated parameters
+    // const guardToCall = guardParts[0];
+    // const guardParameters = guardParts[1] ? guardParts[1].split(",") : [];
+    //
+    // const Component = guards[guardToCall];
+    // const hasMoreGuards = routeGuards.length > (routeGuards.indexOf(guard) + 1);
 
     return (
         <Component

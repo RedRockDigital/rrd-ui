@@ -19,9 +19,9 @@ Server.propTypes = {
     config: PropTypes.object,
 };
 
-if (import.meta.env.VITE_SENTRY_LARAVEL_DSN) {
+if (window.sentryDsn) {
     Sentry.init({
-        dsn: import.meta.env.VITE_SENTRY_LARAVEL_DSN,
+        dsn: window.sentryDsn,
         integrations: [],
         beforeSend (event, hint) {
             // Check if it is an exception, and if so, show the report dialog

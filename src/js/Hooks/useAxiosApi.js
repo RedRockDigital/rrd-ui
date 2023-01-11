@@ -3,12 +3,12 @@ import { DateTime } from "luxon";
 
 import useRefreshToken from "./useRefreshToken";
 import useAuth from "./useAuth";
-
-import httpApi from "@/Services/Http";
+import useHttp from "./useHttp";
 
 const useAxiosApi = () => {
     const refresh = useRefreshToken();
     const { auth } = useAuth();
+    const httpApi = useHttp();
 
     useEffect(() => {
         const requestIntercept = httpApi.interceptors.request.use(

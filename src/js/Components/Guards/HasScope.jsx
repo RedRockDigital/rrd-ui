@@ -4,14 +4,14 @@ import { useNavigate } from "react-router-dom";
 
 import { HasAccess } from "@/Components/Partials/Helpers";
 
-const HasScope = ({ children, parameters }) => {
+const HasScope = ({ children, scope }) => {
     const navigate = useNavigate();
 
     const handleNoAccess = () => navigate("/");
 
     return (
         <HasAccess
-            scope={parameters[0]}
+            scope={scope}
             handleNoAccess={handleNoAccess}
         >
             {children}
@@ -24,7 +24,7 @@ HasScope.propTypes = {
         PropTypes.arrayOf(PropTypes.node),
         PropTypes.node,
     ]).isRequired,
-    parameters: PropTypes.array,
+    scope: PropTypes.string,
 };
 
 export default HasScope;

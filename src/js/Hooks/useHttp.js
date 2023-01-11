@@ -1,14 +1,13 @@
+import React from "react";
 import axios from "axios";
 
-import useConfig from "@/Hooks/useConfig";
+import useConfig from "./useConfig";
 
-const Http = () => {
+const useHttp = () => {
     const { getConfig } = useConfig();
 
-    const apiRoute = getConfig('apiRoute');
-
     return axios.create({
-        baseURL: apiRoute,
+        baseURL: getConfig('apiRoute'),
         headers: {
             "Content-Type": "application/json",
             Accept: "application/json",
@@ -16,4 +15,4 @@ const Http = () => {
     });
 };
 
-export default Http;
+export default  useHttp();

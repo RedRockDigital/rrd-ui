@@ -1,14 +1,18 @@
 import Vapor from "laravel-vapor";
 
 import useAuth from "@/Hooks/useAuth";
+import useConfig from "@/Hooks/useConfig";
 
 const useVapor = () => {
     const { auth } = useAuth();
+    const { getConfig } = useConfig();
 
-    Vapor.withBaseAssetUrl(import.meta.env.VITE_VAPOR_ASSET_URL);
+    const assetUrl = getConfig("assetUrl");
+
+    Vapor.withBaseAssetUrl(assetUrl);
 
     const upload = (file, onProgress) => Vapor.store(file, {
-        signedStorageUrl: `${import.meta.env.VITE_API_BASE_URL}/upload`,
+        signedStorageUrl: `${assetUrl}/upload`,
         progress: onProgress,
         headers: {
             Authorization: `Bearer ${auth?.accessToken}`,

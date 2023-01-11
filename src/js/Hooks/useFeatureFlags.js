@@ -1,17 +1,21 @@
 import { useState, useEffect } from "react";
 
 import useUser from "@/Hooks/useUser";
+import useConfig from "@/Hooks/useConfig";
 
 const featureFlagKeys = Object.keys(window.app.feature_flags);
 
 const useFeatureFlags = () => {
+    const { getConfig } = useConfig();
     const [features, setFeatures] = useState([]);
     const { user } = useUser();
 
+    const envFeatures = getConfig("features");
+
     useEffect(() => {
         if (!user || user?.current_team?.features !== undefined) {
-            let features = import.meta.env.VITE_USE_FEATURES
-                ? import.meta.env.VITE_USE_FEATURES
+            let features = envFeatures ?
+                envFeatures
                     ?.split(",")
                     .filter(feature => featureFlagKeys.indexOf(feature) !== -1)
                 : [];

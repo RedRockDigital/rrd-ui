@@ -9,6 +9,7 @@ const useLanguage = () => {
     const [content, setContent] = useState(null);
 
     const languages = getConfig("languages");
+    const env = getConfig("env");
 
     useEffect(() => {
         if (!language) {
@@ -58,7 +59,7 @@ const useLanguage = () => {
 
     const c = useCallback((key, replaceValues = {}) => {
         if (!key) {
-            if (import.meta.env.VITE_APP_ENV === "local") {
+            if (env === "local") {
                 console.warn(`Supplier key: "${key}" is undefined. This message will be removed in production`);
             }
             return;
@@ -75,7 +76,7 @@ const useLanguage = () => {
         } while (content[contentString] !== undefined);
 
         if (contentString === undefined) {
-            if (import.meta.env.VITE_APP_ENV === "local") {
+            if (env === "local") {
                 console.warn(`Supplied key: "${key}" does not exist. This message will be removed in production`);
             }
 

@@ -26,7 +26,7 @@ const Notifications = () => {
         window.addEventListener("mousedown", handleDismissNotifications);
         window.addEventListener("touchstart", handleDismissNotifications);
 
-        if (user.id) {
+        if (user.id && socket) {
             socket
                 .private(`App.Models.User.${user.id}`)
                 .notification((notification) => {
@@ -38,7 +38,7 @@ const Notifications = () => {
             window.removeEventListener("mousedown", handleDismissNotifications);
             window.removeEventListener("touchstart", handleDismissNotifications);
 
-            socket.leave(`App.Models.User.${user.id}`);
+            socket && socket.leave(`App.Models.User.${user.id}`);
         };
     }, [user.id]);
 

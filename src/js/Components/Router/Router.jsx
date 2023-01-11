@@ -22,7 +22,7 @@ const Router = () => {
                                 key={key}
                                 path={route.path}
                                 element={
-                                    <RenderRouteThroughGuard>
+                                    <RenderRouteThroughGuard guards={route.guards}>
                                         <route.component />
                                     </RenderRouteThroughGuard>
                                 }
@@ -70,15 +70,19 @@ ScrollToTop.propTypes = {
 
 const AnalyticsWrapper = ({ children }) => {
     const location = useLocation();
+    const { getConfig } = useConfig();
+
+    const fathom = getConfig("fathomAnalytics");
+    const env = getConfig("env");
 
     useEffect(() => {
-        if (import.meta.env.VITE_FATHOM_ANALYTICS && import.meta.env.VITE_APP_ENV === "production") {
-            Fathom.load(import.meta.env.VITE_FATHOM_ANALYTICS);
+        if (fathom && env === "production") {
+            Fathom.load(fathom);
         }
     }, []);
 
     useEffect(() => {
-        if (import.meta.env.VITE_FATHOM_ANALYTICS && import.meta.env.VITE_APP_ENV === "production") {
+        if (fathom && env === "production") {
             Fathom.trackPageview();
         }
     }, [location]);
@@ -98,40 +102,29 @@ AnalyticsWrapper.propTypes = {
 };
 
 const RenderRouteThroughGuard = ({ children, guards: routeGuards, previousGuard = false }) => {
-    return (
-        <>
-            {children}
-        </>
-    );
+    if (routeGuards.length === 0) {
+        return children;
+    }
 
-    // console.log(guards);
-    // if (routeGuards.length === 0) {
-    //     return children;
-    // }
-    //
-    // let guard = null;
-    //
-    // if (previousGuard !== false) {
-    //     const lastGuardIndex = routeGuards.indexOf(previousGuard);
-    //     guard = routeGuards[lastGuardIndex + 1];
-    // } else {
-    //     guard = routeGuards[0];
-    // }
-    //
-    // const guardParts = guard.split(":"); // 0 is the guard, 1 is comma separated parameters
-    // const guardToCall = guardParts[0];
-    // const guardParameters = guardParts[1] ? guardParts[1].split(",") : [];
-    //
-    // const Component = guards[guardToCall];
-    // const hasMoreGuards = routeGuards.length > (routeGuards.indexOf(guard) + 1);
+    let guard = null;
+
+    if (previousGuard !== false) {
+        const lastGuardIndex = routeGuards.indexOf(previousGuard);
+        guard = routeGuards[lastGuardIndex + 1];
+    } else {
+        guard = routeGuards[0];
+    }
+
+    const Component = guard?.component ?? guard;
+    const hasMoreGuards = routeGuards.length > (routeGuards.indexOf(guard) + 1);
 
     return (
         <Component
-            parameters={guardParameters}
+            {...guard?.props}
         >
             {hasMoreGuards
                 ? (
-                        <RenderRouteThroughGuard guards={routeGuards} previousGuard={guardToCall}>
+                        <RenderRouteThroughGuard guards={routeGuards} previousGuard={guard}>
                             {children}
                         </RenderRouteThroughGuard>
                     )
@@ -142,10 +135,7 @@ const RenderRouteThroughGuard = ({ children, guards: routeGuards, previousGuard 
 
 RenderRouteThroughGuard.propTypes = {
     guards: PropTypes.array,
-    previousGuard: PropTypes.oneOfType([
-        PropTypes.node,
-        PropTypes.bool,
-    ]),
+    previousGuard: PropTypes.any,
     children: PropTypes.oneOfType([
         PropTypes.arrayOf(PropTypes.node),
         PropTypes.node,

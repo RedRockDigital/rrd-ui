@@ -3,14 +3,13 @@ import { useState, useEffect } from "react";
 import useUser from "@/Hooks/useUser";
 import useConfig from "@/Hooks/useConfig";
 
-const featureFlagKeys = window?.app?.feature_flags ? Object.keys(window.app.feature_flags) : [];
-
 const useFeatureFlags = () => {
     const { getConfig } = useConfig();
     const [features, setFeatures] = useState([]);
     const { user } = useUser();
 
     const envFeatures = getConfig("features");
+    const featureFlagKeys = getConfig("featuresEnabled");
 
     useEffect(() => {
         if (!user || user?.current_team?.features !== undefined) {
@@ -27,14 +26,16 @@ const useFeatureFlags = () => {
                 );
             }
 
-            const params = new URLSearchParams(window.location.search);
+            if (window?.location?.search) {
+                const params = new URLSearchParams(window.location.search);
 
-            for (const flag of featureFlagKeys) {
-                if (!params.has(flag)) {
-                    continue;
+                for (const flag of featureFlagKeys) {
+                    if (!params.has(flag)) {
+                        continue;
+                    }
+
+                    features.push(flag);
                 }
-
-                features.push(flag);
             }
 
             setFeatures(features);

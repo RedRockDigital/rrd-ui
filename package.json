@@ -1,6 +1,6 @@
 {
   "name": "@redrockdigital/rrd-ui",
-  "version": "1.0.2",
+  "version": "1.0.25",
   "description": "Provides a component and utility framework designed to work with React.JS",
   "repository": "https://github.com/RedRockDigital/rrd-ui",
   "author": "RedRockDigital",
@@ -36,7 +36,7 @@
     "prop-types": "^15.8.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-router-dom": "^6.6.1",
+    "react-router-dom": "^6.6.2",
     "react-timeago": "^7.1.0",
     "react-toastify": "^9.1.1",
     "sass": "^1.54.4",

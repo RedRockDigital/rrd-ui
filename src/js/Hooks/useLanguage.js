@@ -16,7 +16,7 @@ const useLanguage = () => {
             let selectedLanguage = localStorage.getItem("_language");
 
             if (!selectedLanguage) {
-                selectedLanguage = window.navigator.language;
+                selectedLanguage = window.navigator.language ?? "en-GB";
             }
 
             const config = getLanguageConfig(selectedLanguage);
@@ -48,6 +48,10 @@ const useLanguage = () => {
     };
 
     const loadContent = async (config) => {
+        if (!config?.fileName) {
+            return;
+        }
+
         const request = await import(config?.fileName /* @vite-ignore */);
 
         if (request?.default) {

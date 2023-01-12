@@ -1,21 +1,16 @@
 import * as Sentry from "@sentry/react";
-import PropTypes from "prop-types";
 import { BrowserRouter } from "react-router-dom";
 
 import App from "./App";
 
-const Client = ({ config }) => {
+const Client = () => {
     return (
         <Sentry.ErrorBoundary>
             <BrowserRouter>
-                <App config={config}/>
+                <App />
             </BrowserRouter>
         </Sentry.ErrorBoundary>
     );
-};
-
-Client.propTypes = {
-    config: PropTypes.object,
 };
 
 if (window.sentryDsn) {

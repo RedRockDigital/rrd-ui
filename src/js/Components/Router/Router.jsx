@@ -115,7 +115,7 @@ const RenderRouteThroughGuard = ({ children, guards: routeGuards, previousGuard 
         guard = routeGuards[0];
     }
 
-    const Component = guard?.component ?? guard;
+    const Component = guard?.guard ?? guard;
     const hasMoreGuards = routeGuards.length > (routeGuards.indexOf(guard) + 1);
 
     return (

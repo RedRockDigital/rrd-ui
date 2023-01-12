@@ -1,37 +1,30 @@
 import React from "react";
 import { ToastContainer } from "react-toastify";
-import PropTypes from "prop-types";
 
 import { Loader } from "@/Components/Partials";
-import { Router } from "@/Components/Router"
+import { Router } from "@/Components/Router";
 import { ModalContainer } from "@/Components/Modal";
-import { AuthProvider, UserProvider, ModalProvider, ConfigProvider } from "@/Context";
+import { AuthProvider, UserProvider, ModalProvider } from "@/Context";
 
-const App = ({ config }) => {
+const App = () => {
     return (
-        <ConfigProvider config={config}>
-            <AuthProvider>
-                <UserProvider>
-                    <ModalProvider>
-                        <Loader>
-                            <Router />
-                        </Loader>
+        <AuthProvider>
+            <UserProvider>
+                <ModalProvider>
+                    <Loader>
+                        <Router />
+                    </Loader>
 
-                        <ModalContainer />
+                    <ModalContainer />
 
-                        <ToastContainer
-                            hideProgressBar={true}
-                            closeButton={false}
-                        />
-                    </ModalProvider>
-                </UserProvider>
-            </AuthProvider>
-        </ConfigProvider>
+                    <ToastContainer
+                        hideProgressBar={true}
+                        closeButton={false}
+                    />
+                </ModalProvider>
+            </UserProvider>
+        </AuthProvider>
     );
-};
-
-App.propTypes = {
-    config: PropTypes.object,
 };
 
 export default App;

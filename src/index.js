@@ -21,3 +21,6 @@ export * from "./js/Components/Toastr";
 
 // Context/Providers
 export * from "./js/Context";
+
+// Services
+export * from "./js/Services";

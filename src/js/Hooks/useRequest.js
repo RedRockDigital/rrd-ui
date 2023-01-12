@@ -1,7 +1,11 @@
+import startsWith from "lodash/startsWith";
+
 import useAxiosApi from "./useAxiosApi";
+import useConfig from "./useConfig";
 
 const useRequest = () => {
     const axiosApi = useAxiosApi();
+    const { getConfig } = useConfig();
 
     /**
      * @method convertPath
@@ -9,10 +13,10 @@ const useRequest = () => {
      * @return {string}
      */
     const convertPath = (path) => {
-        path.replace(`${window.location.origin}/api`, "");
-        path.replace("/api", "");
+        path = path.replace(`${window.location.origin}/api`, "");
+        path = path.replace("/api", "");
 
-        return path;
+        return `${getConfig('apiRoute')}${!startsWith(path, "/") ? "/" : ""}${path}`;
     };
 
     /**

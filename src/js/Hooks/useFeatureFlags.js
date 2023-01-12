@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import useUser from "@/Hooks/useUser";
 import useConfig from "@/Hooks/useConfig";
 
-const featureFlagKeys = Object.keys(window.app.feature_flags);
+const featureFlagKeys = window.app?.feature_flags ? Object.keys(window.app.feature_flags) : [];
 
 const useFeatureFlags = () => {
     const { getConfig } = useConfig();

@@ -102,7 +102,7 @@ AnalyticsWrapper.propTypes = {
 };
 
 const RenderRouteThroughGuard = ({ children, guards: routeGuards, previousGuard = false }) => {
-    if (routeGuards.length === 0) {
+    if (!routeGuards || routeGuards?.length === 0) {
         return children;
     }
 

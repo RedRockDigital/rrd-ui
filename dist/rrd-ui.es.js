@@ -15551,7 +15551,7 @@ const dv = ({
   previousGuard: n = !1
 }) => {
   var o;
-  if (e.length === 0)
+  if (!e || (e == null ? void 0 : e.length) === 0)
     return t;
   let r = null;
   if (n !== !1) {

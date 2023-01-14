@@ -20,6 +20,7 @@ const Loader = ({ children }) => {
                 try {
                     await refresh();
                 } catch (err) {
+                    console.error(err);
                     // unset the session to prevent unwanted loops
                     sessionStorage.removeItem("refresh_token");
                 }

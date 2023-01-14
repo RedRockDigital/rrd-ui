@@ -5728,12 +5728,12 @@ const GR = /* @__PURE__ */ wm(yx.exports), Jr = GR.create({
     Accept: "application/json"
   }
 }), Mx = () => {
-  const { setToken: t } = $r();
+  const { setToken: t } = $r(), { getConfig: e } = jr();
   return async () => {
-    const { getConfig: e } = jr(), n = sessionStorage.getItem("refresh_token");
+    const n = sessionStorage.getItem("refresh_token");
     if (!n)
       return;
-    const r = await Jr.post("/../oauth/token", {
+    const r = await Jr.post(`${e("apiRoute")}/oauth/token`, {
       grant_type: "refresh_token",
       refresh_token: n,
       client_id: e("oauthClientId"),
@@ -14774,8 +14774,8 @@ const ZC = ({
       if (!(a != null && a.accessToken)) {
         try {
           await r();
-        } catch {
-          sessionStorage.removeItem("refresh_token");
+        } catch (s) {
+          console.error(s), sessionStorage.removeItem("refresh_token");
         }
         n(!1);
       }
@@ -34004,8 +34004,8 @@ const qE = ge.forwardRef(({
       id: i,
       onChange: a,
       className: l,
-      ...u,
-      children: o != null ? o : ""
+      value: o != null ? o : "",
+      ...u
     })
   });
 });

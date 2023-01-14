@@ -5,19 +5,18 @@ import Http from "@/Services/Http";
 
 const useRefreshToken = () => {
     const { setToken } = useAuth();
+    const { getConfig } = useConfig();
 
     return async () => {
-        const { getConfig } = useConfig();
-
         const refreshToken = sessionStorage.getItem("refresh_token");
 
-        // abort, the user isn"t authed
+        // abort, the user isn't authed
         if (!refreshToken) {
             return;
         }
 
         // make a call to the API to request a new access token
-        const response = await Http.post("/../oauth/token", {
+        const response = await Http.post(`${getConfig('apiRoute')}/oauth/token`, {
             grant_type: "refresh_token",
             refresh_token: refreshToken,
             client_id: getConfig("oauthClientId"),

@@ -45,10 +45,9 @@ const Input = React.forwardRef(({
                 id={id}
                 onChange={onChange}
                 className={classes}
+                value={value ?? ""}
                 {...rest}
-            >
-                {value ?? ""}
-            </textarea>
+            />
         </FieldContainer>
     );
 });

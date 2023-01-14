@@ -7,13 +7,14 @@ import { faTrash } from "@fortawesome/free-solid-svg-icons/faTrash";
 import { PrimaryButton, SecondaryButton, DangerButton } from "@/Components/Buttons";
 import Delete from "@/Components/Partials/Modals/Delete";
 
-import { useLanguage, useModal } from "@/Hooks";
+import { useLanguage, useModal, useRequest } from "@/Hooks";
 
 const Actions = ({ modals, actions, handleRefresh, item, routes }) => {
     const { c } = useLanguage();
     const { setModal } = useModal();
+    const { get } = useRequest();
 
-    const handleClick = ({ type, modal, linkType, newTab, onClick }) => {
+    const handleClick = async ({type, modal, linkType, newTab, onClick, download}) => {
         if (onClick) {
             onClick();
         }
@@ -44,21 +45,36 @@ const Actions = ({ modals, actions, handleRefresh, item, routes }) => {
             setModal(
                 modal?.component
                     ? {
-                            component: modal.component,
-                            props: {
-                                ...props,
-                                ...modal.props,
-                            },
-                        }
+                        component: modal.component,
+                        props: {
+                            ...props,
+                            ...modal.props,
+                        },
+                    }
                     : {
-                            component: modals[modal],
-                            props,
-                        }
+                        component: modals[modal],
+                        props,
+                    }
             );
         }
 
         if (linkType) {
-            if (newTab) {
+            if (download) {
+                const request = await get(routes[linkType], {}, {
+                    responseType: "blob",
+                });
+
+                if (request.success) {
+                    const fileURL = window.URL.createObjectURL(new Blob([request.data]));
+                    const fileLink = document.createElement('a');
+
+                    fileLink.href = fileURL;
+                    fileLink.setAttribute('download', download);
+                    document.body.appendChild(fileLink);
+
+                    fileLink.click();
+                }
+            } else if (newTab) {
                 window.open(routes[linkType]);
             } else {
                 window.location.replace(routes[linkType]);

@@ -9,7 +9,7 @@ import Actions from "./Actions";
 
 import { useLanguage } from "@/Hooks";
 
-const Table = ({ modals, title, actions, fetchData, columns }) => {
+const Table = ({ modals, title, actions, fetchData, columns, noDataTitle, noDataMessage }) => {
     const { c } = useLanguage();
 
     const [error, setError] = useState(false);
@@ -75,20 +75,22 @@ const Table = ({ modals, title, actions, fetchData, columns }) => {
 
             {!loading && !error && data && (
                 <>
-                    {data.pagination?.total === 0 && (
+                    {data?.data?.length === 0 && (
                         <Empty
-                            title={c("no_data_title")}
-                            message={c("no_data_message")}
+                            title={noDataTitle ?? c("no_data_title")}
+                            message={noDataMessage ?? c("no_data_message")}
                         >
-                            <Actions
-                                handleRefresh={handleFetchData}
-                                actions={actions}
-                                modals={modals}
-                            />
+                            {actions && (
+                                <Actions
+                                    handleRefresh={handleFetchData}
+                                    actions={actions}
+                                    modals={modals}
+                                />
+                            )}
                         </Empty>
                     )}
 
-                    {data.pagination?.total > 0 && (
+                    {data?.data?.length > 0 && (
                         <>
                             <table className="min-w-full divide-y divide-gray-300">
                                 <thead className="bg-gray-50">
@@ -163,6 +165,8 @@ Table.propTypes = {
     columns: PropTypes.array,
     handleRefresh: PropTypes.func,
     modals: PropTypes.object,
+    noDataTitle: PropTypes.string,
+    noDataMessage: PropTypes.string,
 };
 
 const RenderValue = ({ item, column }) => {

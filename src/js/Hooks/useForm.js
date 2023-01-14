@@ -13,16 +13,20 @@ const useForm = (defaultValues = {}) => {
      */
     const handleInput = (event) => {
         if (event?.target?.type === "file") {
-            setForm(set(
-                form,
-                event.target.name,
-                event.target.multiple ? event.target.files : event.target.files[0]
-            ));
+            setForm({
+                ...set(
+                    form,
+                    event.target.name,
+                    event.target.multiple ? event.target.files : event.target.files[0]
+                ),
+            });
         } else if (
             event?.type === "select" || event?.type === "toggle" || event?.type === "radio" ||
             event?.type === "date-time"
         ) {
-            setForm(set(form, event?.name, event?.value ?? null));
+            setForm({
+                ...set(form, event?.name, event?.value ?? null),
+            });
         } else if (event?.type === "checkbox") {
             const values = form[event?.name] ?? [];
             const index = values.indexOf(event?.value);
@@ -33,9 +37,13 @@ const useForm = (defaultValues = {}) => {
                 values.push(event?.value);
             }
 
-            setForm(set(form, event?.name, values));
+            setForm({
+                ...set(form, event?.name, values),
+            });
         } else {
-            setForm(set(form, event.target.name, event.target.value));
+            setForm({
+                ...set(form, event.target.name, event.target.value),
+            });
         }
     };
 

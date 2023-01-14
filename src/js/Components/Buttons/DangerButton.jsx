@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import BaseButton from "./BaseButton";
 
 /**
- * @function SecondaryButton
+ * @function DangerButton
  * @param {function} onClick
  * @param {string} className
  * @param {JSX.Element} children
@@ -14,7 +14,7 @@ import BaseButton from "./BaseButton";
  * @return {JSX.Element}
  * @constructor
  */
-const SecondaryButton = ({ onClick, className, children, working, disabled, type }) => {
+const DangerButton = ({ onClick, className, children, working, disabled, type }) => {
     const classes = `
         bg-rose-600 text-white rounded-md border border-transparent shadow-sm py-2 px-4
         inline-flex justify-center items-center text-sm font-medium
@@ -39,7 +39,7 @@ const SecondaryButton = ({ onClick, className, children, working, disabled, type
     );
 };
 
-SecondaryButton.propTypes = {
+DangerButton.propTypes = {
     onClick: PropTypes.func,
     className: PropTypes.string,
     children: PropTypes.oneOfType([
@@ -51,4 +51,4 @@ SecondaryButton.propTypes = {
     type: PropTypes.string,
 };
 
-export default SecondaryButton;
+export default DangerButton;

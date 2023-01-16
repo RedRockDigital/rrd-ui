@@ -1,3 +1,4 @@
+import useAsset from "./useAsset";
 import useAuth from "./useAuth";
 import useAxiosApi from "./useAxiosApi";
 import useConfig from "./useConfig";
@@ -14,6 +15,7 @@ import useSocket from "./useSocket";
 import useVapor from "./useVapor";
 
 export {
+    useAsset,
     useAuth,
     useAxiosApi,
     useConfig,

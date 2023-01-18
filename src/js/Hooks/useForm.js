@@ -60,6 +60,7 @@ const useForm = (defaultValues = {}) => {
             event.preventDefault();
         }
 
+        setAlert({});
         setWorking(true);
 
         const response = await handleRequest(form);

@@ -6028,7 +6028,7 @@ const Y8 = (t = {}) => {
         });
     },
     handleSubmit: async (m, v, w = void 0, x = void 0) => {
-      m && m.preventDefault(), n(!0);
+      m && m.preventDefault(), o({}), n(!0);
       const y = await v(r);
       y.success ? w && await w(y) : x ? await x(y) : o({
         message: y.message,

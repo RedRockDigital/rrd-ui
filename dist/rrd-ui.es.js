@@ -19540,7 +19540,7 @@ const cO = ({
 cO.propTypes = {
   title: w.exports.string,
   message: w.exports.string,
-  children: w.exports.oneOfType([w.exports.arrayOf(w.exports.node), w.exports.node]).isRequired
+  children: w.exports.oneOfType([w.exports.arrayOf(w.exports.node), w.exports.node])
 };
 const _j = ({
   modals: t,

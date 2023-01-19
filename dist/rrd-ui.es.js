@@ -34115,21 +34115,19 @@ JE.propTypes = {
 };
 const $8 = ({
   scope: t,
-  children: e,
-  handleNoAccess: n
+  children: e
 }) => {
   const {
-    user: r,
-    hasScope: i
-  } = Xn(), [a, o] = ke(!1);
+    user: n,
+    hasScope: r
+  } = Xn(), [i, a] = ke(!1);
   return Be(() => {
-    wa(r) || (i(t) ? n && n() : o(!0));
-  }, [r, o]), a ? e : null;
+    wa(n) || r(t) || a(!0);
+  }, [n, a]), i ? e : null;
 };
 $8.propTypes = {
   scope: w.exports.oneOfType([w.exports.string, w.exports.array]).isRequired,
-  children: w.exports.oneOfType([w.exports.arrayOf(w.exports.node), w.exports.node]).isRequired,
-  handleNoAccess: w.exports.func
+  children: w.exports.oneOfType([w.exports.arrayOf(w.exports.node), w.exports.node]).isRequired
 };
 const B8 = ({
   children: t,

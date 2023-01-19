@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 
 import { useUser } from "@/Hooks";
 
-const HasAccess = ({ scope, children, handleNoAccess }) => {
+const NoAccess = ({ scope, children }) => {
     const { user, hasScope } = useUser();
 
     const [cantAccess, setCantAccess] = useState(false);
@@ -13,8 +13,6 @@ const HasAccess = ({ scope, children, handleNoAccess }) => {
         if (!isEmpty(user)) {
             if (!hasScope(scope)) {
                 setCantAccess(true);
-            } else if (handleNoAccess) {
-                handleNoAccess();
             }
         }
     }, [user, setCantAccess]);
@@ -22,7 +20,7 @@ const HasAccess = ({ scope, children, handleNoAccess }) => {
     return cantAccess ? children : null;
 };
 
-HasAccess.propTypes = {
+NoAccess.propTypes = {
     scope: PropTypes.oneOfType([
         PropTypes.string,
         PropTypes.array,
@@ -31,7 +29,6 @@ HasAccess.propTypes = {
         PropTypes.arrayOf(PropTypes.node),
         PropTypes.node,
     ]).isRequired,
-    handleNoAccess: PropTypes.func,
 };
 
-export default HasAccess;
+export default NoAccess;

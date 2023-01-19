@@ -3,6 +3,7 @@ import Guest from "./Guest";
 import HasScope from "./HasScope";
 import HasVerified from "./HasVerified";
 import Onboarded from "./Onboarded";
+import PaymentFailed from "./PaymentFailed";
 import TwoFactor from "./TwoFactor";
 
 export {
@@ -11,5 +12,6 @@ export {
     HasScope,
     HasVerified,
     Onboarded,
+    PaymentFailed,
     TwoFactor,
 };

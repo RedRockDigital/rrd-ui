@@ -3,17 +3,20 @@ import PropTypes from "prop-types";
 
 import { Modal, ModalHeader, ModalBody, ModalFooter } from "@/Components/Modal";
 import { PrimaryButton, DangerButton } from "@/Components/Buttons";
+import { Alert } from "@/Components/Partials";
 
 import { useRequest, useLanguage, useToast } from "@/Hooks";
 
 const Delete = ({ onClose, handleRefresh, deleteRoute }) => {
     const [working, setWorking] = useState(false);
+    const [alert, setAlert] = useState(null);
     const { del } = useRequest();
     const { c } = useLanguage();
     const { success } = useToast();
 
     const handleDelete = async () => {
         setWorking(true);
+        setAlert(null);
 
         const request = await del(deleteRoute);
 
@@ -27,6 +30,12 @@ const Delete = ({ onClose, handleRefresh, deleteRoute }) => {
             onClose();
 
             return;
+        } else if (request.message && request.errors) {
+            setAlert({
+                message: request.message,
+                errors: request.errors,
+                type: "error",
+            });
         }
 
         setWorking(false);
@@ -38,8 +47,9 @@ const Delete = ({ onClose, handleRefresh, deleteRoute }) => {
                 {c("delete_header")}
             </ModalHeader>
 
-            <ModalBody className="text-center">
-                {c("delete_message")}
+            <ModalBody className="text-center space-y-4">
+                {alert && (<Alert {...alert} />)}
+                <p>{c("delete_message")}</p>
             </ModalBody>
 
             <ModalFooter className="flex justify-center space-x-2">

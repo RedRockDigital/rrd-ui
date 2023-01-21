@@ -12,6 +12,7 @@ const Notifications = () => {
     const socket = useSocket();
     const { user } = useUser();
     const notificationRef = useRef();
+    const notificationTriggerRef = useRef();
 
     const [unreadNotifications, setUnreadNotifications] = useState(0);
     const [showNotifications, setShowNotifications] = useState(false);
@@ -43,7 +44,10 @@ const Notifications = () => {
     }, [user.id]);
 
     const handleDismissNotifications = (event) => {
-        if (!notificationRef?.current || notificationRef.current.contains(event.target)) {
+        if (
+            !notificationRef?.current || notificationRef.current.contains(event.target) ||
+            notificationTriggerRef.current.contains(event.target)
+        ) {
             return;
         }
 
@@ -53,6 +57,7 @@ const Notifications = () => {
     return (
         <div className="relative">
             <div
+                ref={notificationTriggerRef}
                 className="px-4 py-2 rounded-md text-sm font-medium text-gray-200 hover:text-white cursor-pointer relative"
                 onClick={() => setShowNotifications(!showNotifications)}
             >

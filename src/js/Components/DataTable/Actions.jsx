@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React, { useState, Fragment } from "react";
 import PropTypes from "prop-types";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -10,6 +10,8 @@ import Delete from "@/Components/Partials/Modals/Delete";
 import { useLanguage, useModal, useRequest } from "@/Hooks";
 
 const Actions = ({ modals, actions, handleRefresh, item, routes }) => {
+    const [working, setWorking] = useState(false);
+
     const { c } = useLanguage();
     const { setModal } = useModal();
     const { get } = useRequest();
@@ -60,6 +62,8 @@ const Actions = ({ modals, actions, handleRefresh, item, routes }) => {
 
         if (linkType) {
             if (download) {
+                setWorking(true);
+
                 const request = await get(routes[linkType], {}, {
                     responseType: "blob",
                 });
@@ -74,6 +78,8 @@ const Actions = ({ modals, actions, handleRefresh, item, routes }) => {
 
                     fileLink.click();
                 }
+
+                setWorking(false);
             } else if (newTab) {
                 window.open(routes[linkType]);
             } else {
@@ -90,7 +96,7 @@ const Actions = ({ modals, actions, handleRefresh, item, routes }) => {
                 return (
                     <Fragment key={key}>
                         {type === "primary_button" && (
-                            <PrimaryButton onClick={() => handleClick(action)}>
+                            <PrimaryButton working={working} onClick={() => handleClick(action)}>
                                 {icon && (
                                     <FontAwesomeIcon
                                         icon={icon}
@@ -103,7 +109,7 @@ const Actions = ({ modals, actions, handleRefresh, item, routes }) => {
                         )}
 
                         {type === "secondary_button" && (
-                            <SecondaryButton onClick={() => handleClick(action)}>
+                            <SecondaryButton working={working} onClick={() => handleClick(action)}>
                                 {icon && (
                                     <FontAwesomeIcon
                                         icon={icon}
@@ -116,7 +122,7 @@ const Actions = ({ modals, actions, handleRefresh, item, routes }) => {
                         )}
 
                         {type === "danger_button" && (
-                            <DangerButton onClick={() => handleClick(action)}>
+                            <DangerButton working={working} onClick={() => handleClick(action)}>
                                 {icon && (
                                     <FontAwesomeIcon
                                         icon={icon}
@@ -129,7 +135,7 @@ const Actions = ({ modals, actions, handleRefresh, item, routes }) => {
                         )}
 
                         {type === "delete" && (
-                            <DangerButton onClick={() => handleClick(action)}>
+                            <DangerButton working={working} onClick={() => handleClick(action)}>
                                 {icon && (
                                     <FontAwesomeIcon
                                         icon={faTrash}

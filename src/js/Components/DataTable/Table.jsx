@@ -75,7 +75,7 @@ const Table = ({ modals, title, actions, fetchData, columns, noDataTitle, noData
 
             {!loading && !error && data && (
                 <>
-                    {data?.data?.length === 0 && (
+                    {(!data?.data || data?.data?.length === 0) && (
                         <Empty
                             title={noDataTitle ?? c("no_data_title")}
                             message={noDataMessage ?? c("no_data_message")}

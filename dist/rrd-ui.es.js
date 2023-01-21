@@ -19582,7 +19582,7 @@ const _j = ({
     }), l && /* @__PURE__ */ S(Ko, {
       children: /* @__PURE__ */ S(Ll, {})
     }), !l && !u && m && /* @__PURE__ */ ce(wo, {
-      children: [((x = m == null ? void 0 : m.data) == null ? void 0 : x.length) === 0 && /* @__PURE__ */ S(sO, {
+      children: [(!(m != null && m.data) || ((x = m == null ? void 0 : m.data) == null ? void 0 : x.length) === 0) && /* @__PURE__ */ S(sO, {
         title: a != null ? a : s("no_data_title"),
         message: o != null ? o : s("no_data_message"),
         children: n && /* @__PURE__ */ S(to, {

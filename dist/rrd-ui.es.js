@@ -19464,10 +19464,11 @@ var kv = {};
 })(kv);
 const wj = ({
   title: t,
-  message: e
-}) => /* @__PURE__ */ S(Qo, {
-  children: /* @__PURE__ */ oe(Ko, {
-    className: "flex justify-center items-center flex-col",
+  message: e,
+  withoutCard: n = !1
+}) => {
+  const r = /* @__PURE__ */ oe("div", {
+    className: "text-center flex justify-center items-center flex-col",
     children: [/* @__PURE__ */ S("div", {
       className: "h-12 w-12 flex items-center justify-center rounded-full bg-green-100",
       children: /* @__PURE__ */ S(nt, {
@@ -19477,22 +19478,29 @@ const wj = ({
       className: "mt-3 text-lg font-medium leading-6 text-gray-900",
       children: t
     }), /* @__PURE__ */ S("p", {
-      className: "mt-2 text-sm text-gray-500 text-center",
+      className: "mt-2 text-sm text-gray-500",
       children: e
     })]
-  })
-});
+  });
+  return n ? r : /* @__PURE__ */ S(Qo, {
+    children: /* @__PURE__ */ S(Ko, {
+      children: r
+    })
+  });
+};
 wj.propTypes = {
   title: w.exports.string,
-  message: w.exports.string
+  message: w.exports.string,
+  withoutCard: w.exports.bool
 };
 const uO = ({
   title: t,
   message: e,
-  children: n
-}) => /* @__PURE__ */ S(Qo, {
-  children: /* @__PURE__ */ oe(Ko, {
-    className: "text-center",
+  children: n,
+  withoutCard: r = !1
+}) => {
+  const i = /* @__PURE__ */ oe("div", {
+    className: "text-center flex justify-center items-center flex-col",
     children: [/* @__PURE__ */ S("h3", {
       className: "mt-2 text-sm font-medium text-gray-900",
       children: t
@@ -19503,12 +19511,18 @@ const uO = ({
       className: "mt-6",
       children: n
     })]
-  })
-});
+  });
+  return r ? i : /* @__PURE__ */ S(Qo, {
+    children: /* @__PURE__ */ S(Ko, {
+      children: i
+    })
+  });
+};
 uO.propTypes = {
   title: w.exports.string,
   message: w.exports.string,
-  children: w.exports.oneOfType([w.exports.arrayOf(w.exports.node), w.exports.node])
+  children: w.exports.oneOfType([w.exports.arrayOf(w.exports.node), w.exports.node]),
+  withoutCard: w.exports.bool
 };
 var cO = {};
 (function(t) {
@@ -19529,36 +19543,40 @@ var cO = {};
 const lO = ({
   title: t,
   message: e,
-  children: n
+  children: n,
+  withoutCard: r = !1
 }) => {
   const {
-    c: r
-  } = Mn();
-  return /* @__PURE__ */ S(Qo, {
-    children: /* @__PURE__ */ oe(Ko, {
-      className: "flex justify-center items-center flex-col",
-      children: [/* @__PURE__ */ S("div", {
-        className: "h-12 w-12 flex items-center justify-center rounded-full bg-red-100",
-        children: /* @__PURE__ */ S(nt, {
-          icon: cO.faExclamation
-        })
-      }), /* @__PURE__ */ S("h3", {
-        className: "mt-3 text-lg font-medium leading-6 text-gray-900",
-        children: t != null ? t : r("default_error_title")
-      }), /* @__PURE__ */ S("p", {
-        className: "mt-2 text-sm text-gray-500 text-center",
-        children: e != null ? e : r("default_error_message")
-      }), n && /* @__PURE__ */ S("div", {
-        className: "mt-6",
-        children: n
-      })]
+    c: i
+  } = Mn(), a = /* @__PURE__ */ oe("div", {
+    className: "text-center flex justify-center items-center flex-col",
+    children: [/* @__PURE__ */ S("div", {
+      className: "h-12 w-12 flex items-center justify-center rounded-full bg-red-100",
+      children: /* @__PURE__ */ S(nt, {
+        icon: cO.faExclamation
+      })
+    }), /* @__PURE__ */ S("h3", {
+      className: "mt-3 text-lg font-medium leading-6 text-gray-900",
+      children: t != null ? t : i("default_error_title")
+    }), /* @__PURE__ */ S("p", {
+      className: "mt-2 text-sm text-gray-500 text-center",
+      children: e != null ? e : i("default_error_message")
+    }), n && /* @__PURE__ */ S("div", {
+      className: "mt-6",
+      children: n
+    })]
+  });
+  return r ? a : /* @__PURE__ */ S(Qo, {
+    children: /* @__PURE__ */ S(Ko, {
+      children: a
     })
   });
 };
 lO.propTypes = {
   title: w.exports.string,
   message: w.exports.string,
-  children: w.exports.oneOfType([w.exports.arrayOf(w.exports.node), w.exports.node])
+  children: w.exports.oneOfType([w.exports.arrayOf(w.exports.node), w.exports.node]),
+  withoutCard: w.exports.bool
 };
 const _j = ({
   modals: t,

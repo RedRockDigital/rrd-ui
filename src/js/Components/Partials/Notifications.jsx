@@ -8,7 +8,7 @@ import { faBell } from "@fortawesome/free-solid-svg-icons/faBell";
 import { useUser, useRequest, useLanguage, useSocket } from "@/Hooks";
 import { Loading } from "@/Components/Partials";
 
-const Notifications = () => {
+const Notifications = ({ icon }) => {
     const socket = useSocket();
     const { user } = useUser();
     const notificationRef = useRef();
@@ -61,7 +61,7 @@ const Notifications = () => {
                 className="px-4 py-2 rounded-md text-sm font-medium text-gray-200 hover:text-white cursor-pointer relative"
                 onClick={() => setShowNotifications(!showNotifications)}
             >
-                <FontAwesomeIcon icon={faBell} />
+                <FontAwesomeIcon icon={icon ?? faBell} />
 
                 {unreadNotifications > 0 && (
                     <div className="rounded-full w-5 h-5 flex items-center justify-center absolute right-0 top-0 bg-red-500 text-xs">
@@ -78,6 +78,10 @@ const Notifications = () => {
             )}
         </div>
     );
+};
+
+Notifications.propTypes = {
+    icon: PropTypes.any,
 };
 
 const NotificationDrawer = forwardRef(({ setShowNotifications }, ref) => {

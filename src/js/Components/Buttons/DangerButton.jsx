@@ -10,11 +10,13 @@ import BaseButton from "./BaseButton";
  * @param {JSX.Element} children
  * @param {boolean} working
  * @param {boolean} disabled
- * @param {string} [type]
+ * @param {string} type
+ * @param {IconDefinition} leftIcon
+ * @param {IconDefinition} rightIcon
  * @return {JSX.Element}
  * @constructor
  */
-const DangerButton = ({ onClick, className, children, working, disabled, type }) => {
+const DangerButton = ({ onClick, className, children, working, disabled, type, leftIcon, rightIcon }) => {
     const classes = `
         bg-rose-600 text-white rounded-md border border-transparent shadow-sm py-2 px-4
         inline-flex justify-center items-center text-sm font-medium
@@ -33,6 +35,8 @@ const DangerButton = ({ onClick, className, children, working, disabled, type })
             onClick={onClick}
             disabled={disabled}
             working={working}
+            leftIcon={leftIcon}
+            rightIcon={rightIcon}
         >
             {children}
         </BaseButton>
@@ -49,6 +53,8 @@ DangerButton.propTypes = {
     working: PropTypes.bool,
     disabled: PropTypes.bool,
     type: PropTypes.string,
+    leftIcon: PropTypes.any,
+    rightIcon: PropTypes.any,
 };
 
 export default DangerButton;

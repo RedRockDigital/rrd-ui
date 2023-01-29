@@ -10,11 +10,13 @@ import BaseButton from "./BaseButton";
  * @param {JSX.Element} children
  * @param {boolean} working
  * @param {boolean} disabled
- * @param {string} [type]
+ * @param {string} type
+ * @param {IconDefinition} leftIcon
+ * @param {IconDefinition} rightIcon
  * @return {JSX.Element}
  * @constructor
  */
-const SecondaryButton = ({ onClick, className, children, working, disabled, type }) => {
+const SecondaryButton = ({ onClick, className, children, working, disabled, type, leftIcon, rightIcon }) => {
     const classes = `
         inline-flex items-center justify-center rounded-md border border-transparent bg-gray-900 px-4 py-2 text-sm font-medium text-white shadow-sm
         ${
@@ -32,6 +34,8 @@ const SecondaryButton = ({ onClick, className, children, working, disabled, type
             onClick={onClick}
             disabled={disabled}
             working={working}
+            leftIcon={leftIcon}
+            rightIcon={rightIcon}
         >
             {children}
         </BaseButton>
@@ -48,6 +52,8 @@ SecondaryButton.propTypes = {
     working: PropTypes.bool,
     disabled: PropTypes.bool,
     type: PropTypes.string,
+    leftIcon: PropTypes.any,
+    rightIcon: PropTypes.any,
 };
 
 export default SecondaryButton;

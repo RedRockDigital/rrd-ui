@@ -8,9 +8,9 @@ const useSocket = () => {
     const { auth } = useAuth();
     const { getConfig } = useConfig();
 
-    const pusherConfig = getConfig('pusher');
+    const pusherConfig = getConfig("pusher");
 
-    if (!pusherConfig) {
+    if (!pusherConfig || !pusherConfig.enabled) {
         return false;
     }
 

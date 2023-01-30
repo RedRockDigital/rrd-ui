@@ -1,6 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 
+import { useConfig } from "@/Hooks";
+
 /**
  * @function Card
  * @param {JSX.Element} children
@@ -9,8 +11,10 @@ import PropTypes from "prop-types";
  * @constructor
  */
 const Card = ({ children, className }) => {
+    const { getConfig } = useConfig();
+
     return (
-        <div className={`bg-white overflow-hidden sm:shadow-lg w-full rounded-lg ${className}`}>
+        <div className={`${getConfig("theme.card.default") ?? "bg-white overflow-hidden sm:shadow-lg w-full rounded-lg"} ${className}`}>
             {children}
         </div>
     );

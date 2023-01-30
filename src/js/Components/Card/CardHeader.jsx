@@ -1,6 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 
+import { useConfig } from "@/Hooks";
+
 /**
  * @function CardHeader
  * @param {JSX.Element} children
@@ -10,9 +12,11 @@ import PropTypes from "prop-types";
  * @constructor
  */
 const CardHeader = ({ children, className, headerClassName }) => {
+    const { getConfig } = useConfig();
+
     return (
-        <div className={`bg-white px-4 py-5 border-b border-gray-200 ${className}`}>
-            <h3 className={`text-lg leading-6 font-medium text-gray-900 ${headerClassName}`}>
+        <div className={`${getConfig("theme.cardHeader.default") ?? "bg-white px-4 py-5 border-b border-gray-200"} ${className}`}>
+            <h3 className={`${getConfig("theme.cardHeader.title") ?? "text-lg leading-6 font-medium text-gray-900"} ${headerClassName}`}>
                 {children}
             </h3>
         </div>

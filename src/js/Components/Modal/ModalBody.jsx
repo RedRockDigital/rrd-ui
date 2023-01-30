@@ -1,6 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 
+import { useConfig } from "@/Hooks";
+
 /**
  * @function ModalBody
  * @param {JSX.Element} children
@@ -9,8 +11,10 @@ import PropTypes from "prop-types";
  * @constructor
  */
 const ModalBody = ({ children, className }) => {
+    const { getConfig } = useConfig();
+
     return (
-        <div className={`px-4 py-5 sm:p-6 ${className} flex-1`}>
+        <div className={`${getConfig("theme.modalBody.default") ?? "px-4 py-5 sm:p-6 flex-1"} ${className}`}>
             {children}
         </div>
     );

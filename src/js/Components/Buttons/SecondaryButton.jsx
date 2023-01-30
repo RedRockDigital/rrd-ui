@@ -3,6 +3,8 @@ import PropTypes from "prop-types";
 
 import BaseButton from "./BaseButton";
 
+import { useConfig } from "@/Hooks";
+
 /**
  * @function SecondaryButton
  * @param {function} onClick
@@ -17,11 +19,13 @@ import BaseButton from "./BaseButton";
  * @constructor
  */
 const SecondaryButton = ({ onClick, className, children, working, disabled, type, leftIcon, rightIcon }) => {
+    const { getConfig } = useConfig();
+
     const classes = `
-        inline-flex items-center justify-center rounded-md border border-transparent bg-gray-900 px-4 py-2 text-sm font-medium text-white shadow-sm
+        ${getConfig("theme.secondary_button.default") ?? "inline-flex items-center justify-center rounded-md border border-transparent bg-gray-900 px-4 py-2 text-sm font-medium text-white shadow-sm"}
         ${
             !disabled && !working
-                ? "hover:bg-black focus:outline-none focus:ring-2 focus:ring-gray-900 focus:ring-offset-2 hover:scale-105"
+                ? `${getConfig("theme.secondary_button.hover") ?? "hover:bg-black focus:outline-none focus:ring-2 focus:ring-gray-900 focus:ring-offset-2 hover:scale-105"}`
                 : "opacity-50"
         }
         ${className}

@@ -19148,8 +19148,8 @@ const dc = ({
   const {
     getConfig: u
   } = vt(), c = `
-        ${(l = u("theme.muted_button.default")) != null ? l : "bg-rose-600 text-white rounded-md border border-transparent shadow-sm py-2 px-4 inline-flex justify-center items-center text-sm font-medium"}
-        ${!i && !r ? `${(h = u("theme.muted_button.hover")) != null ? h : "hover:bg-rose-800 focus:ring-rose-500 focus:outline-none focus:ring-2 focus:ring-offset-2 hover:scale-105"}` : "opacity-50"}
+        ${(l = u("theme.dangerButton.default")) != null ? l : "bg-rose-600 text-white rounded-md border border-transparent shadow-sm py-2 px-4 inline-flex justify-center items-center text-sm font-medium"}
+        ${!i && !r ? `${(h = u("theme.dangerButton.hover")) != null ? h : "hover:bg-rose-800 focus:ring-rose-500 focus:outline-none focus:ring-2 focus:ring-offset-2 hover:scale-105"}` : "opacity-50"}
         ${e}
     `;
   return /* @__PURE__ */ S(Jo, {
@@ -19187,8 +19187,8 @@ const wj = ({
   const {
     getConfig: u
   } = vt(), c = `
-        ${(l = u("theme.muted_button.default")) != null ? l : "bg-white text-gray-600 rounded-md border border-transparent shadow-sm py-2 px-4 inline-flex justify-center items-center text-sm font-medium"}
-        ${!i && !r ? `${(h = u("theme.muted_button.hover")) != null ? h : "hover:bg-gray-100 focus:ring-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2"}` : "opacity-50"}
+        ${(l = u("theme.mutedButton.default")) != null ? l : "bg-white text-gray-600 rounded-md border border-transparent shadow-sm py-2 px-4 inline-flex justify-center items-center text-sm font-medium"}
+        ${!i && !r ? `${(h = u("theme.mutedButton.hover")) != null ? h : "hover:bg-gray-100 focus:ring-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2"}` : "opacity-50"}
         ${e}
     `;
   return /* @__PURE__ */ S(Jo, {
@@ -19265,8 +19265,8 @@ const rO = ({
   const {
     getConfig: u
   } = vt(), c = `
-        ${(l = u("theme.secondary_button.default")) != null ? l : "inline-flex items-center justify-center rounded-md border border-transparent bg-gray-900 px-4 py-2 text-sm font-medium text-white shadow-sm"}
-        ${!i && !r ? `${(h = u("theme.secondary_button.hover")) != null ? h : "hover:bg-black focus:outline-none focus:ring-2 focus:ring-gray-900 focus:ring-offset-2 hover:scale-105"}` : "opacity-50"}
+        ${(l = u("theme.secondaryButton.default")) != null ? l : "inline-flex items-center justify-center rounded-md border border-transparent bg-gray-900 px-4 py-2 text-sm font-medium text-white shadow-sm"}
+        ${!i && !r ? `${(h = u("theme.secondaryButton.hover")) != null ? h : "hover:bg-black focus:outline-none focus:ring-2 focus:ring-gray-900 focus:ring-offset-2 hover:scale-105"}` : "opacity-50"}
         ${e}
     `;
   return /* @__PURE__ */ S(Jo, {

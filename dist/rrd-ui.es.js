@@ -13611,7 +13611,7 @@ var ev = /* @__PURE__ */ function() {
 const K$ = /* @__PURE__ */ pm(DC.exports), e3 = () => {
   var r, i, a;
   const { auth: t } = jr(), { getConfig: e } = ur(), n = e("pusher");
-  if (!n)
+  if (!n || !n.enabled)
     return !1;
   try {
     return new Q$({

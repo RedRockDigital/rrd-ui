@@ -11,14 +11,12 @@ import { useConfig } from "@/Hooks";
  * @return {JSX.Element}
  * @constructor
  */
-const CardHeader = ({ children, className, headerClassName }) => {
+const CardHeader = ({ children, className }) => {
     const { getConfig } = useConfig();
 
     return (
-        <div className={`${getConfig("theme.cardHeader.default") ?? "bg-white px-4 py-5 border-b border-gray-200"} ${className}`}>
-            <h3 className={`${getConfig("theme.cardHeader.title") ?? "text-lg leading-6 font-medium text-gray-900"} ${headerClassName}`}>
-                {children}
-            </h3>
+        <div className={`${getConfig("theme.cardHeader.default") ?? "bg-white px-4 py-5 border-b border-gray-200 text-lg leading-6 font-medium text-gray-900"} ${className}`}>
+            {children}
         </div>
     );
 };
@@ -29,7 +27,6 @@ CardHeader.propTypes = {
         PropTypes.node,
     ]).isRequired,
     className: PropTypes.string,
-    headerClassName: PropTypes.string,
 };
 
 export default CardHeader;

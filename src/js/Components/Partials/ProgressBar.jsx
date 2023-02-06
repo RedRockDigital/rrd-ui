@@ -1,12 +1,13 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-const ProgressBar = ({ size = "medium", bgColor = "bg-gray-200", railColor = "bg-blue-600", className, progress }) => {
+const ProgressBar = ({ size = "medium", bgColor = "bg-gray-200", railColor = "bg-blue-600", className, progress, hideLabel = false }) => {
     let heightClass;
 
     switch (size) {
         case "small":
             heightClass = "h-2";
+            hideLabel = true;
             break;
         case "medium":
             heightClass = "h-4";
@@ -28,7 +29,11 @@ const ProgressBar = ({ size = "medium", bgColor = "bg-gray-200", railColor = "bg
                     width: `${progress}%`,
                 }}
             >
-                {progress}%
+                {!hideLabel && (
+                    <>
+                        {progress}%
+                    </>
+                )}
             </div>
         </div>
     );
@@ -40,6 +45,7 @@ ProgressBar.propTypes = {
     railColor: PropTypes.string,
     className: PropTypes.string,
     progress: PropTypes.number,
+    hideLabel: PropTypes.bool,
 };
 
 export default ProgressBar;

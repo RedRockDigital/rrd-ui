@@ -13,6 +13,7 @@ const AsideNav = ({ nav }) => {
             <nav className="space-y-1">
                 {nav.map((item) => (
                     <NavLink
+                        end
                         key={item.name_ref}
                         to={item.href}
                         className={({ isActive }) =>

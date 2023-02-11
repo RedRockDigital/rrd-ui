@@ -3,6 +3,8 @@ import PropTypes from "prop-types";
 
 import Label from "./Label";
 
+import { useConfig } from "@/Hooks";
+
 /**
  * @function Radio
  * @param {string} labelPlacement
@@ -28,8 +30,10 @@ const Radio = ({
     selected,
     name,
 }) => {
+    const { getConfig } = useConfig();
+
     return (
-        <div className={`${containerClassName} flex items-center`}>
+        <div className={`${getConfig("theme.radio.container", "flex items-center")} ${containerClassName}`}>
             {(labelPlacement === "left") && label && (
                 <Label
                     label={label}
@@ -48,7 +52,7 @@ const Radio = ({
                     name,
                     value,
                 })}
-                className="h-4 w-4 text-indigo-600 transition duration-150 ease-in-out border-gray-500 border hover:border-gray-600 focus:border-indigo-500"
+                className={getConfig("theme.radio.default", "h-4 w-4 text-indigo-600 transition duration-150 ease-in-out border-gray-500 border hover:border-gray-600 focus:border-indigo-500")}
             />
 
             {(labelPlacement === "right") && label && (

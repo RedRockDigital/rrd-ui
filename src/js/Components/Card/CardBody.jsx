@@ -14,7 +14,7 @@ const CardBody = ({ children, className }) => {
     const { getConfig } = useConfig();
 
     return (
-        <div className={`${getConfig("theme.cardBody.default") ?? "px-4 py-5 sm:p-6"} ${className}`}>
+        <div className={`${getConfig("theme.cardBody.default", "px-4 py-5 sm:p-6")} ${className}`}>
             {children}
         </div>
     );

@@ -1,7 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
 
+import { useConfig } from "@/Hooks";
+
 const ProgressBar = ({ size = "medium", bgColor = "bg-gray-200", railColor = "bg-blue-600", className, progress, hideLabel = false }) => {
+    const { getConfig } = useConfig();
+
     let heightClass;
 
     switch (size) {
@@ -22,9 +26,9 @@ const ProgressBar = ({ size = "medium", bgColor = "bg-gray-200", railColor = "bg
     }
 
     return (
-        <div className={`w-full ${bgColor} rounded-full ${heightClass} ${className}`}>
+        <div className={`${getConfig("theme.progressBar.container", "w-full rounded-full")} ${bgColor} ${heightClass} ${className}`}>
             <div
-                className={`${railColor} ${heightClass} rounded-full text-xs font-medium text-white text-center p-0.5 leading-none`}
+                className={`${railColor} ${heightClass} ${getConfig("theme.progressBar.rail", "rounded-full text-xs font-medium text-white text-center p-0.5 leading-none")}`}
                 style={{
                     width: `${progress}%`,
                 }}

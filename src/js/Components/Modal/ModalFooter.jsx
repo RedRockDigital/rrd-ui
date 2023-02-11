@@ -14,7 +14,7 @@ const ModalFooter = ({ children, className }) => {
     const { getConfig } = useConfig();
 
     return (
-        <div className={`${getConfig("theme.modalFooter.default") ?? "bg-gray-200 bg-opacity-50 px-4 py-3 sm:px-6"} ${className}`}>
+        <div className={`${getConfig("theme.modalFooter.default", "bg-gray-200 bg-opacity-50 px-4 py-3 sm:px-6")} ${className}`}>
             {children}
         </div>
     );

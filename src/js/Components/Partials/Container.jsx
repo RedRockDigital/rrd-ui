@@ -1,9 +1,13 @@
 import React from "react";
 import PropTypes from "prop-types";
 
+import { useConfig } from "@/Hooks";
+
 const Container = ({ children, sizeClassName, className }) => {
+    const { getConfig } = useConfig();
+
     return (
-        <div className={`mx-auto w-full ${sizeClassName ?? "max-w-7xl"} px-3 md:px-0 ${className}`}>
+        <div className={`${getConfig("theme.container.default", "mx-auto w-full px-3 md:px-0")} ${sizeClassName ?? "max-w-7xl"} ${className}`}>
             {children}
         </div>
     );

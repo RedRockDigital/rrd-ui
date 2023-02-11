@@ -37,7 +37,7 @@ const DropDown = ({ children, icon }) => {
         <div className="relative">
             <div
                 ref={dropdownTriggerRef}
-                className={getConfig("theme.dropDown.icon") ?? "text-gray-500 cursor-pointer"}
+                className={getConfig("theme.dropDown.icon", "text-gray-500 cursor-pointer")}
                 onClick={() => setOpen(!open)}
             >
                 <FontAwesomeIcon icon={icon ?? faEllipsisV} />
@@ -46,7 +46,7 @@ const DropDown = ({ children, icon }) => {
             {open && (
                 <div
                     ref={dropdownRef}
-                    className={getConfig("theme.dropDown.container") ?? "absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"}
+                    className={getConfig("theme.dropDown.container", "absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none")}
                     role="menu"
                 >
                     <div className="py-1">

@@ -2,10 +2,14 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Link as LinkRRD } from "react-router-dom";
 
+import { useConfig } from "@/Hooks";
+
 const Link = ({ to, children }) => {
+    const { getConfig } = useConfig();
+
     return (
         <LinkRRD
-            className="transition duration text-indigo-600 hover:text-indigo-500"
+            className={getConfig("theme.link.default", "transition duration text-indigo-600 hover:text-indigo-500")}
             to={to}
         >
             {children}

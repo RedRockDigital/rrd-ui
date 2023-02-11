@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import useRefreshToken from "@/Hooks/useRefreshToken";
 import useUser from "@/Hooks/useUser";
 import useAuth from "@/Hooks/useAuth";
+import useConfig from "@/Hooks/useConfig";
 
 import { Loading } from "@/Components/Partials";
 
@@ -12,6 +13,7 @@ const Loader = ({ children }) => {
     const refresh = useRefreshToken();
     const { loadUser } = useUser();
     const { auth } = useAuth();
+    const { getConfig } = useConfig();
 
     // attempt to hydrate the user
     useEffect(() => {
@@ -49,7 +51,7 @@ const Loader = ({ children }) => {
 
     if (loading) {
         return (
-            <div className="h-screen w-full flex items-center justify-center">
+            <div className={getConfig("theme.loader.default", "h-screen w-full flex items-center justify-center")}>
                 <Loading />
             </div>
         );

@@ -1,6 +1,6 @@
 {
   "name": "rrd-ui",
-  "version": "1.0.29",
+  "version": "1.0.32",
   "description": "Provides a component and utility framework designed to work with React.JS",
   "repository": "https://github.com/RedRockDigital/rrd-ui",
   "author": "RedRockDigital",

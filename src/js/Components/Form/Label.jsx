@@ -1,6 +1,8 @@
 import React, { Fragment } from "react";
 import PropTypes from "prop-types";
 
+import { useConfig } from "@/Hooks";
+
 /**
  * @function Label
  * @param {string} label
@@ -11,14 +13,10 @@ import PropTypes from "prop-types";
  * @constructor
  */
 const Label = ({ label, htmlFor, className, error = null }) => {
-    const classes = `
-        block text-sm font-medium leading-5
-        ${error ? "text-red-800" : "text-gray-700"}
-        ${className}
-    `;
+    const { getConfig } = useConfig();
 
     return (
-        <div className={`${classes} flex flex-row items-center`}>
+        <div className={`${getConfig("theme.label.default", "flex flex-row items-center block text-sm font-medium leading-5")} ${error ? "text-red-800" : "text-gray-700"} ${className}`}>
             <label htmlFor={htmlFor}>
                 {label}
 

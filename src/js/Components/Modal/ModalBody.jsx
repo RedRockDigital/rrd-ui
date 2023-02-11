@@ -14,7 +14,7 @@ const ModalBody = ({ children, className }) => {
     const { getConfig } = useConfig();
 
     return (
-        <div className={`${getConfig("theme.modalBody.default") ?? "px-4 py-5 sm:p-6 flex-1"} ${className}`}>
+        <div className={`${getConfig("theme.modalBody.default", "px-4 py-5 sm:p-6 flex-1")} ${className}`}>
             {children}
         </div>
     );

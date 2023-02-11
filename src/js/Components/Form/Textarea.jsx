@@ -3,6 +3,8 @@ import PropTypes from "prop-types";
 
 import { FieldContainer } from "./index";
 
+import { useConfig } from "@/Hooks";
+
 /**
  * @function Input
  * @param {string} containerClassName
@@ -26,9 +28,10 @@ const Input = React.forwardRef(({
     error = null,
     ...rest
 }, ref) => {
+    const { getConfig } = useConfig();
+
     const classes = `
-        focus:ring-app-primary-focus focus:border-app-primary-focus block w-full border shadow-sm py-2 px-3 focus:outline-none sm:text-sm
-        rounded-md
+        ${getConfig("theme.textarea.default", "focus:ring-app-primary-focus focus:border-app-primary-focus block w-full border shadow-sm py-2 px-3 focus:outline-none sm:text-sm rounded-md")}
         ${error ? "border-red-800" : "border-gray-300"}
         ${className}
     `;

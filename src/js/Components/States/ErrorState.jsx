@@ -5,22 +5,23 @@ import { faExclamation } from "@fortawesome/free-solid-svg-icons/faExclamation";
 
 import { Card, CardBody } from "@/Components/Card";
 
-import { useLanguage } from "@/Hooks";
+import { useLanguage, useConfig } from "@/Hooks";
 
 const ErrorState = ({ title, message, children, withoutCard = false }) => {
     const { c } = useLanguage();
+    const { getConfig } = useConfig();
 
     const inner = (
-        <div className="text-center flex justify-center items-center flex-col">
-            <div className="h-12 w-12 flex items-center justify-center rounded-full bg-red-100">
+        <div className={getConfig("theme.errorState.container", "text-center flex justify-center items-center flex-col")}>
+            <div className={getConfig("theme.errorState.icon", "h-12 w-12 flex items-center justify-center rounded-full bg-red-100")}>
                 <FontAwesomeIcon icon={faExclamation} />
             </div>
 
-            <h3 className="mt-3 text-lg font-medium leading-6 text-gray-900">
+            <h3 className={getConfig("theme.errorState.title", "mt-3 text-lg font-medium leading-6 text-gray-900")}>
                 {title ?? c("default_error_title")}
             </h3>
 
-            <p className="mt-2 text-sm text-gray-500 text-center">
+            <p className={getConfig("theme.errorState.message", "mt-2 text-sm text-gray-500 text-center")}>
                 {message ?? c("default_error_message")}
             </p>
 

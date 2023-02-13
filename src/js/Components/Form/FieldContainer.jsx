@@ -3,9 +3,13 @@ import PropTypes from "prop-types";
 
 import Label from "./Label";
 
+import { useConfig } from "@/Hooks";
+
 const FieldContainer = ({ children, label, containerClassName, id }) => {
+    const { getConfig } = useConfig();
+
     return (
-        <div className={`space-y-1 ${containerClassName}`}>
+        <div className={`${getConfig("theme.fieldContainer.default", "space-y-1")} ${containerClassName}`}>
             {label && (<Label label={label} htmlFor={id} />)}
             {children}
         </div>

@@ -7,6 +7,8 @@ import { faTimes } from "@fortawesome/free-solid-svg-icons/faTimes";
 
 import Label from "./Label";
 
+import { useConfig } from "@/Hooks";
+
 /**
  * @function Toggle
  * @param {*} value
@@ -32,34 +34,27 @@ const Toggle = ({
     error = null,
     name,
 }) => {
-    const classes1 = `
-        relative inline-block flex-shrink-0 h-6 w-11
-        rounded-full border-2 border-transparent
-        cursor-pointer transition-colors ease-in-out
-        duration-200 focus:outline-none focus:shadow-outline
+    const { getConfig } = useConfig();
+
+    const container = `
+        ${getConfig("theme.toggle.container", "relative inline-block flex-shrink-0 h-6 w-11 rounded-full border-2 border-transparent cursor-pointer transition-colors ease-in-out duration-200 focus:outline-none focus:shadow-outline")}
         ${value ? "bg-indigo-600" : "bg-gray-200"}
         ${!value ? " opacity-50" : ""}
         ${disabled ? "opacity-50 cursor-not-allowed" : ""}
     `;
 
-    const classes2 = `
-        translate-x-0 relative inline-block h-5 w-5
-        rounded-full bg-white shadow transform
-        transition ease-in-out duration-200
+    const innerContainer = `
+        ${getConfig("theme.toggle.innerContainer", "translate-x-0 relative inline-block h-5 w-5 rounded-full bg-white shadow transform transition ease-in-out duration-200")}
         ${value ? "translate-x-5" : "translate-x-0"}
     `;
 
-    const classes3 = `
-        ease-in duration-200 absolute
-        inset-0 h-full w-full flex items-center
-        justify-center transition-opacity
+    const unchecked = `
+        ${getConfig("theme.toggle.unchecked", "ease-in duration-200 absolute inset-0 h-full w-full flex items-center justify-center transition-opacity")}
         ${value ? "opacity-0" : "opacity-100"}
     `;
 
-    const classes4 = `
-        ease-out duration-100 absolute
-        inset-0 h-full w-full flex items-center
-        justify-center transition-opacity
+    const checked = `
+        ${getConfig("theme.toggle.checked", "ease-out duration-100 absolute inset-0 h-full w-full flex items-center justify-center transition-opacity")}
         ${!value ? "opacity-0" : "opacity-100"}
     `;
 
@@ -95,16 +90,16 @@ const Toggle = ({
                 role="checkbox"
                 tabIndex="0"
                 aria-checked="false"
-                className={classes1}
+                className={container}
             >
-                <span className={classes2}>
-                    <span className={classes3}>
+                <span className={innerContainer}>
+                    <span className={unchecked}>
                         <FontAwesomeIcon
                             icon={faTimes}
                             className="h-3 w-3 text-gray-400"
                         />
                     </span>
-                    <span className={classes4}>
+                    <span className={checked}>
                         <FontAwesomeIcon
                             icon={faCheck}
                             className="h-3 w-3 text-gray-400"

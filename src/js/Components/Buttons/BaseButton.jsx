@@ -10,14 +10,16 @@ import { faSpinner } from "@fortawesome/free-solid-svg-icons/faSpinner";
  * @param {JSX.Element} children
  * @param {boolean} working
  * @param {boolean} disabled
- * @param {string} [type]
+ * @param {string} type
+ * @param {IconDefinition} leftIcon
+ * @param {IconDefinition} rightIcon
  * @return {JSX.Element}
  * @constructor
  */
-const BaseButton = ({ onClick, className, children, working, disabled, type }) => {
+const BaseButton = ({ onClick, className, children, working, disabled, type, leftIcon, rightIcon }) => {
     return (
         <button
-            className={`${className} transition duration-200`}
+            className={`${className} transition duration-200 flex items-center`}
             type={type ?? (onClick !== undefined ? "button" : "submit")}
             onClick={onClick}
             disabled={disabled || working}
@@ -25,7 +27,16 @@ const BaseButton = ({ onClick, className, children, working, disabled, type }) =
             {working && (
                 <FontAwesomeIcon icon={faSpinner} spin className="mr-1" />
             )}
+
+            {leftIcon && (
+                <FontAwesomeIcon icon={leftIcon} className="mr-1" />
+            )}
+
             {children}
+
+            {rightIcon && (
+                <FontAwesomeIcon icon={rightIcon} className="ml-1" />
+            )}
         </button>
     );
 };
@@ -40,6 +51,8 @@ BaseButton.propTypes = {
     working: PropTypes.bool,
     disabled: PropTypes.bool,
     type: PropTypes.string,
+    leftIcon: PropTypes.any,
+    rightIcon: PropTypes.any,
 };
 
 export default BaseButton;

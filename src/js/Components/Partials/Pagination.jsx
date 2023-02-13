@@ -6,13 +6,15 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronLeft } from "@fortawesome/free-solid-svg-icons/faChevronLeft";
 import { faChevronRight } from "@fortawesome/free-solid-svg-icons/faChevronRight";
 
+import { useConfig } from "@/Hooks";
+
 const Pagination = ({ className, page, pageCount, goToPage }) => {
-    const liClasses = "-ml-px inline-flex bg-white";
-    const disabledClasses = "opacity-50";
-    const aClasses = "px-4 py-2 border border-gray-300 text-sm " +
-        "leading-5 font-medium focus:outline-none active:text-gray-700" +
-        "transition ease-in-out duration-150 hover:opacity-75";
-    const activeLinkClass = "bg-indigo-600 text-white border-indigo-600";
+    const { getConfig } = useConfig();
+
+    const liClasses = getConfig("theme.pagination.li", "-ml-px inline-flex bg-white");
+    const disabledClasses = getConfig("theme.pagination.disabled", "opacity-50");
+    const aClasses = getConfig("theme.pagination.link", "px-4 py-2 border border-gray-300 text-sm leading-5 font-medium focus:outline-none active:text-gray-700 transition ease-in-out duration-150 hover:opacity-75");
+    const activeLinkClass = getConfig("theme.pagination.activeLink", "bg-indigo-600 text-white border-indigo-600");
 
     const handlePageChange = (page) => {
         // React pagination starts from 0 instead of 1, increment by 1
@@ -20,7 +22,7 @@ const Pagination = ({ className, page, pageCount, goToPage }) => {
     };
 
     return (
-        <div className={`rounded-lg ${className}`}>
+        <div className={`${getConfig("theme.pagination.container") ?? "rounded-lg"} ${className}`}>
             <ReactPaginate
                 previousLabel={<FontAwesomeIcon icon={faChevronLeft}/>}
                 nextLabel={<FontAwesomeIcon icon={faChevronRight}/>}

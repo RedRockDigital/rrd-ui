@@ -5,6 +5,8 @@ import { faTimesCircle } from "@fortawesome/free-solid-svg-icons/faTimesCircle";
 import { faCheckCircle } from "@fortawesome/free-solid-svg-icons/faCheckCircle";
 import { faExclamationCircle } from "@fortawesome/free-solid-svg-icons/faExclamationCircle";
 
+import { useConfig } from "@/Hooks";
+
 const Alert = ({ type, message, errors }) => {
     const ref = createRef();
 
@@ -39,15 +41,17 @@ Alert.propTypes = {
 };
 
 const Success = forwardRef(({ message }, ref) => {
+    const { getConfig } = useConfig();
+
     return (
-        <div className="bg-white" ref={ref}>
-            <div className="rounded-md bg-green-300 bg-opacity-25 p-4">
-                <div className="flex">
-                    <div className="flex-shrink-0 text-green-400">
+        <div className={getConfig("theme.alert.container", "bg-white")} ref={ref}>
+            <div className={getConfig("theme.alert.successContainer", "rounded-md bg-green-300 bg-opacity-25 p-4")}>
+                <div className={getConfig("theme.alert.innerContainer", "flex space-x-3")}>
+                    <div className={getConfig("theme.alert.successContainer", "flex-shrink-0 text-green-400")}>
                         <FontAwesomeIcon icon={faCheckCircle} size="lg" color=""/>
                     </div>
-                    <div className="ml-3">
-                        <h3 className="text-sm leading-5 font-medium text-green-800">
+                    <div>
+                        <h3 className={getConfig("theme.alert.successText", "text-sm leading-5 font-medium text-green-800")}>
                             {message}
                         </h3>
                     </div>
@@ -63,15 +67,17 @@ Success.propTypes = {
 };
 
 const Warning = forwardRef(({ message }, ref) => {
+    const { getConfig } = useConfig();
+
     return (
-        <div className="bg-white" ref={ref}>
-            <div className="bg-yellow-300 bg-opacity-25 p-4 rounded-md">
-                <div className="flex">
-                    <div className="flex-shrink-0 text-yellow-400">
+        <div className={getConfig("theme.alert.container", "bg-white")} ref={ref}>
+            <div className={getConfig("theme.alert.warningContainer", "bg-yellow-300 bg-opacity-25 p-4 rounded-md")}>
+                <div className={getConfig("theme.alert.innerContainer", "flex space-x-3")}>
+                    <div className={getConfig("theme.alert.warningIcon", "flex-shrink-0 text-yellow-400")}>
                         <FontAwesomeIcon icon={faExclamationCircle} size="lg" color=""/>
                     </div>
-                    <div className="ml-3">
-                        <h3 className="text-sm leading-5 font-medium text-yellow-800">
+                    <div>
+                        <h3 className={getConfig("theme.alert.warningText", "text-sm leading-5 font-medium text-yellow-800")}>
                             {message}
                         </h3>
                     </div>
@@ -87,31 +93,29 @@ Warning.propTypes = {
 };
 
 const Error = forwardRef(({ message, errors }, ref) => {
+    const { getConfig } = useConfig();
+
     return (
-        <div className="bg-white" ref={ref}>
-            <div
-                className="bg-red-300 bg-opacity-25 p-4 rounded-md"
-            >
-                <div className="flex">
-                    <div className="flex-shrink-0 text-red-400">
+        <div className={getConfig("theme.alert.container", "bg-white")} ref={ref}>
+            <div className={getConfig("theme.alert.dangerButton", "bg-red-300 bg-opacity-25 p-4 rounded-md")}>
+                <div className={getConfig("theme.alert.innerContainer", "flex space-x-3")}>
+                    <div className={getConfig("theme.alert.dangerIcon", "flex-shrink-0 text-red-400")}>
                         <FontAwesomeIcon icon={faTimesCircle} size="lg" color=""/>
                     </div>
-                    <div className="ml-3">
-                        <h3 className="text-sm leading-5 font-medium text-red-800">
+                    <div>
+                        <h3 className={getConfig("theme.alert.dangerText", "text-sm leading-5 font-medium text-red-800")}>
                             {message}
                         </h3>
                         {errors && (
-                            <div className="mt-1 text-sm leading-5 text-red-700">
-                                <ul className="list-disc pl-5 space-y-1">
-                                    {Object.entries(errors).map((error1, key1) => {
-                                        return error1[1].map((error2, key2) => (
-                                            <li key={`${key1}_${key2}`}>
-                                                {error2}
-                                            </li>
-                                        ));
-                                    })}
-                                </ul>
-                            </div>
+                            <ul className={getConfig("theme.alert.dangerList", "mt-1 text-sm leading-5 text-red-700 list-disc pl-5 space-y-1")}>
+                                {Object.entries(errors).map((error1, key1) => {
+                                    return error1[1].map((error2, key2) => (
+                                        <li key={`${key1}_${key2}`}>
+                                            {error2}
+                                        </li>
+                                    ));
+                                })}
+                            </ul>
                         )}
                     </div>
                 </div>

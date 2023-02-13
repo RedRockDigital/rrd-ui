@@ -4,6 +4,8 @@ import DatePicker from "react-datepicker";
 
 import FieldContainer from "./FieldContainer";
 
+import { useConfig } from "@/Hooks";
+
 /**
  * @param {string} containerClassName
  * @param {string} label
@@ -25,6 +27,8 @@ const DateTimePicker = ({
     onChange,
     ...rest
 }) => {
+    const { getConfig } = useConfig();
+
     return (
         <FieldContainer
             containerClassName={containerClassName}
@@ -40,7 +44,7 @@ const DateTimePicker = ({
                     name,
                     value,
                 })}
-                className={`w-full border border-gray-300 rounded-l-md shadow-sm ${className}`}
+                className={`${getConfig("theme.datetimepicker.input", "w-full border border-gray-300 rounded-l-md shadow-sm")} ${className}`}
             />
         </FieldContainer>
     );

@@ -1,9 +1,13 @@
 import React from "react";
 import PropTypes from "prop-types";
 
+import { useConfig } from "@/Hooks";
+
 const Content = ({ className, children }) => {
+    const { getConfig } = useConfig();
+
     return (
-        <div className={`text-gray-500 text-md space-x-3 ${className}`}>
+        <div className={`${getConfig("theme.content.default", "text-gray-500 text-md space-x-3")} ${className}`}>
             {children}
         </div>
     );

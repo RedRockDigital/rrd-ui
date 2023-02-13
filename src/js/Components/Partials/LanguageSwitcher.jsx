@@ -2,9 +2,10 @@ import React, { useEffect, useRef, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronDown } from "@fortawesome/free-solid-svg-icons/faChevronDown";
 
-import { useLanguage } from "@/Hooks";
+import { useLanguage, useConfig } from "@/Hooks";
 
 const LanguageSwitcher = () => {
+    const { getConfig } = useConfig();
     const { currentLanguage, languagesSupported, handleChangeLanguage } = useLanguage();
     const menuRef = useRef();
 
@@ -34,12 +35,12 @@ const LanguageSwitcher = () => {
     };
 
     return (
-        <div className="relative flex-shrink-0">
+        <div className={getConfig("theme.languageSwitcher.container", "relative flex-shrink-0")}>
             <div>
                 <button
                     onClick={() => setShowLanguageSelector(!showLanguageSelector)}
                     type="button"
-                    className="flex items-center space-x-1 text-sm rounded-full text-white font-medium text-gray-500 hover:text-gray-900"
+                    className={getConfig("theme.languageSwitcher.trigger", "flex items-center space-x-1 text-sm rounded-full text-white font-medium text-gray-500 hover:text-gray-900")}
                     id="user-menu-button"
                     aria-expanded="false"
                     aria-haspopup="true"
@@ -53,13 +54,13 @@ const LanguageSwitcher = () => {
             {showLanguageSelector && (
                 <div
                     ref={menuRef}
-                    className="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
+                    className={getConfig("theme.languageSwitcher.dropdownContainer", "origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none")}
                     tabIndex="-1"
                 >
                     {languagesSupported()?.map((language, key) => (
                         <div
                             key={key}
-                            className="block px-4 py-2 text-sm text-gray-700 cursor-pointer"
+                            className={getConfig("theme.languageSwitcher.dropdownItem", "block px-4 py-2 text-sm text-gray-700 cursor-pointer")}
                             role="menuitem"
                             tabIndex="-1"
                             onClick={() => handleChange(language)}

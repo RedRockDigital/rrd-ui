@@ -2,6 +2,7 @@ import Alert from "./Alert";
 import AsideNav from "./AsideNav";
 import Container from "./Container";
 import Content from "./Content";
+import DropDown from "./DropDown";
 import LanguageSwitcher from "./LanguageSwitcher";
 import Link from "./Link";
 import Loader from "./Loader";
@@ -17,6 +18,7 @@ export {
     AsideNav,
     Container,
     Content,
+    DropDown,
     LanguageSwitcher,
     Link,
     Loader,

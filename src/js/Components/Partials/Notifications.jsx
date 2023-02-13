@@ -5,12 +5,13 @@ import PropTypes from "prop-types";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBell } from "@fortawesome/free-solid-svg-icons/faBell";
 
-import { useUser, useRequest, useLanguage, useSocket } from "@/Hooks";
+import { useUser, useRequest, useLanguage, useSocket, useConfig } from "@/Hooks";
 import { Loading } from "@/Components/Partials";
 
-const Notifications = () => {
+const Notifications = ({ icon }) => {
     const socket = useSocket();
     const { user } = useUser();
+    const { getConfig } = useConfig();
     const notificationRef = useRef();
     const notificationTriggerRef = useRef();
 
@@ -58,13 +59,13 @@ const Notifications = () => {
         <div className="relative">
             <div
                 ref={notificationTriggerRef}
-                className="px-4 py-2 rounded-md text-sm font-medium text-gray-200 hover:text-white cursor-pointer relative"
+                className={getConfig("theme.notifications.default", "px-4 py-2 rounded-md text-sm font-medium text-gray-200 hover:text-white cursor-pointer relative")}
                 onClick={() => setShowNotifications(!showNotifications)}
             >
-                <FontAwesomeIcon icon={faBell} />
+                <FontAwesomeIcon icon={icon ?? faBell} />
 
                 {unreadNotifications > 0 && (
-                    <div className="rounded-full w-5 h-5 flex items-center justify-center absolute right-0 top-0 bg-red-500 text-xs">
+                    <div className={getConfig("theme.notifications.countIcon", "rounded-full w-5 h-5 flex items-center justify-center absolute right-0 top-0 bg-red-500 text-xs")}>
                         {unreadNotifications}
                     </div>
                 )}
@@ -80,9 +81,14 @@ const Notifications = () => {
     );
 };
 
+Notifications.propTypes = {
+    icon: PropTypes.any,
+};
+
 const NotificationDrawer = forwardRef(({ setShowNotifications }, ref) => {
     const { get } = useRequest();
     const { c } = useLanguage();
+    const { getConfig } = useConfig();
 
     const [working, setWorking] = useState(null);
     const [notifications, setNotifications] = useState(null);
@@ -104,7 +110,7 @@ const NotificationDrawer = forwardRef(({ setShowNotifications }, ref) => {
     return (
         <div
             ref={ref}
-            className="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none divide-y divide-gray-100 flex flex-col"
+            className={getConfig("theme.notificationDrawer.container", "origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none divide-y divide-gray-100 flex flex-col")}
         >
             {working && (
                 <Loading />
@@ -113,7 +119,7 @@ const NotificationDrawer = forwardRef(({ setShowNotifications }, ref) => {
             {!working && notifications && (
                 <>
                     {notifications.length === 0 && (
-                        <div className="text-gray-700 text-sm p-2">
+                        <div className={getConfig("theme.notificationDrawer.emptyText", "text-gray-700 text-sm p-2")}>
                             {c("notifications_none_available")}
                         </div>
                     )}
@@ -140,6 +146,7 @@ NotificationDrawer.propTypes = {
 const Notification = ({ notification, setShowNotifications }) => {
     const { patch } = useRequest();
     const { loadUser } = useUser();
+    const { getConfig } = useConfig();
     const navigate = useNavigate();
 
     const handleReadNotification = async () => {
@@ -162,7 +169,7 @@ const Notification = ({ notification, setShowNotifications }) => {
 
     return (
         <div
-            className="p-2 cursor-pointer flex space-x-2"
+            className={getConfig("theme.notification.container", "p-2 cursor-pointer flex space-x-2")}
             onClick={handleReadNotification}
         >
             <NotificationIcon
@@ -170,18 +177,18 @@ const Notification = ({ notification, setShowNotifications }) => {
             />
 
             <div className="flex-1">
-                <div className="flex justify-between items-center mb-1">
+                <div className={getConfig("theme.notification.titleContainer", "flex justify-between items-center mb-1")}>
                     <TimeAgo
                         date={notification.created_at}
-                        className="text-gray-500 text-xs"
+                        className={getConfig("theme.notifcation.timeText", "text-gray-500 text-xs")}
                     />
 
                     {!notification.read_at && (
-                        <div className="w-2 h-2 rounded-full bg-gray-700" />
+                        <div className={getConfig("theme.notification.readIcon", "w-2 h-2 rounded-full bg-gray-700")} />
                     )}
                 </div>
 
-                <div className="text-gray-700 text-sm">
+                <div className={getConfig("theme.notification.text", "text-gray-700 text-sm")}>
                     {notification.data?.message}
                 </div>
             </div>
@@ -195,6 +202,8 @@ Notification.propTypes = {
 };
 
 const NotificationIcon = ({ type }) => {
+    const { getConfig } = useConfig();
+
     const iconType = "icon";
     const icon = null;
 
@@ -205,13 +214,13 @@ const NotificationIcon = ({ type }) => {
     }
 
     return (
-        <div className="w-8 h-8 flex items-center justify-center rounded-full bg-gray-200">
+        <div className={getConfig("theme.notificationIcon.container", "w-8 h-8 flex items-center justify-center rounded-full bg-gray-200")}>
             {iconType === "icon" && (
-                <FontAwesomeIcon icon={icon} className="h-4 w-4" />
+                <FontAwesomeIcon icon={icon} className={getConfig("theme.notificationIcon.icon", "h-4 w-4")} />
             )}
 
             {iconType === "image" && (
-                <img src={icon} alt="" className="rounded-full w-8 h-8 object-cover" />
+                <img src={icon} alt="" className={getConfig("theme.notificationIcon.image", "rounded-full w-8 h-8 object-cover")} />
             )}
         </div>
     );

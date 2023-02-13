@@ -3,6 +3,8 @@ import PropTypes from "prop-types";
 
 import BaseButton from "./BaseButton";
 
+import { useConfig } from "@/Hooks";
+
 /**
  * @function MutedButton
  * @param {function} onClick
@@ -10,17 +12,20 @@ import BaseButton from "./BaseButton";
  * @param {JSX.Element} children
  * @param {boolean} working
  * @param {boolean} disabled
- * @param {string} [type]
+ * @param {string} type
+ * @param {IconDefinition} leftIcon
+ * @param {IconDefinition} rightIcon
  * @return {JSX.Element}
  * @constructor
  */
-const MutedButton = ({ onClick, className, children, working, disabled, type }) => {
+const MutedButton = ({ onClick, className, children, working, disabled, type, leftIcon, rightIcon }) => {
+    const { getConfig } = useConfig();
+
     const classes = `
-        bg-white text-gray-600 rounded-md border border-transparent shadow-sm py-2 px-4
-        inline-flex justify-center items-center text-sm font-medium
+        ${getConfig("theme.mutedButton.default", "bg-white text-gray-600 rounded-md border border-transparent shadow-sm py-2 px-4 inline-flex justify-center items-center text-sm font-medium")}
         ${
             !disabled && !working
-                ? "hover:bg-gray-100 focus:ring-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2"
+                ? `${getConfig("theme.mutedButton.hover", "hover:bg-gray-100 focus:ring-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2")}`
                 : "opacity-50"
         }
         ${className}
@@ -33,6 +38,8 @@ const MutedButton = ({ onClick, className, children, working, disabled, type }) 
             onClick={onClick}
             disabled={disabled}
             working={working}
+            leftIcon={leftIcon}
+            rightIcon={rightIcon}
         >
             {children}
         </BaseButton>
@@ -49,6 +56,8 @@ MutedButton.propTypes = {
     working: PropTypes.bool,
     disabled: PropTypes.bool,
     type: PropTypes.string,
+    leftIcon: PropTypes.any,
+    rightIcon: PropTypes.any,
 };
 
 export default MutedButton;

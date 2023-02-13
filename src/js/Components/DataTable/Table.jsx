@@ -7,10 +7,11 @@ import { Card, CardBody, CardFooter, CardHeader } from "@/Components/Card";
 import { Pill, Loading, PaginationBar } from "@/Components/Partials";
 import Actions from "./Actions";
 
-import { useLanguage } from "@/Hooks";
+import { useLanguage, useConfig } from "@/Hooks";
 
 const Table = ({ modals, title, actions, fetchData, columns, noDataTitle, noDataMessage }) => {
     const { c } = useLanguage();
+    const { getConfig } = useConfig();
 
     const [error, setError] = useState(false);
     const [loading, setLoading] = useState(false);
@@ -39,9 +40,7 @@ const Table = ({ modals, title, actions, fetchData, columns, noDataTitle, noData
 
     return (
         <Card>
-            <CardHeader
-                headerClassName="flex justify-between items-center"
-            >
+            <CardHeader className={getConfig("theme.table.header", "flex justify-between items-center")}>
                 {title}
 
                 {actions && (
@@ -92,27 +91,27 @@ const Table = ({ modals, title, actions, fetchData, columns, noDataTitle, noData
 
                     {data?.data?.length > 0 && (
                         <>
-                            <table className="min-w-full divide-y divide-gray-300">
-                                <thead className="bg-gray-50">
+                            <table className={getConfig("theme.table.table", "min-w-full divide-y divide-gray-300")}>
+                                <thead className={getConfig("theme.table.thead", "bg-gray-50")}>
                                     <tr>
                                         {columns.map((column, key) => (
                                             <th
                                                 key={`header-${key}`}
                                                 scope="col"
-                                                className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+                                                className={getConfig("theme.table.th", "px-3 py-3.5 text-left text-sm font-semibold text-gray-900")}
                                             >
                                                 {c(column.label_ref)}
                                             </th>
                                         ))}
                                     </tr>
                                 </thead>
-                                <tbody className="bg-white">
+                                <tbody className={getConfig("theme.table.tbody", "bg-white")}>
                                     {data.data.map((item, key) => (
-                                        <tr key={key}>
+                                        <tr key={key} className={getConfig("theme.table.tr") ?? ""}>
                                             {columns.map((column, columnKey) => (
                                                 <td
                                                     key={`${key}-${columnKey}`}
-                                                    className="whitespace-nowrap px-4 py-4 text-sm text-gray-500"
+                                                    className={getConfig("theme.table.td", "whitespace-nowrap px-4 py-4 text-sm text-gray-500")}
                                                     width={column.actions ? "1px" : "auto"}
                                                 >
                                                     {column.actions

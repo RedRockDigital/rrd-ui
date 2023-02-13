@@ -3,6 +3,8 @@ import PropTypes from "prop-types";
 
 import Pagination from "./Pagination";
 
+import { useConfig } from "@/Hooks";
+
 /**
  * @function PaginationBar
  * @param {Number} total
@@ -14,9 +16,11 @@ import Pagination from "./Pagination";
  * @constructor
  */
 const PaginationBar = ({ total, pageCount, page, className, goToPage }) => {
+    const { getConfig } = useConfig();
+
     return (
-        <div className="flex flex-col-reverse md:flex-row justify-between items-center md:items-start mb-4 md:mb-0">
-            <div className="mt-4 text-sm leading-5 text-gray-700 md:my-auto">
+        <div className={getConfig("theme.paginationBar.container", "flex flex-col-reverse md:flex-row justify-between items-center md:items-start mb-4 md:mb-0")}>
+            <div className={getConfig("theme.paginationBar.text", "mt-4 text-sm leading-5 text-gray-700 md:my-auto")}>
                 {total} {`result${total > 1 ? "s" : ""}`} in {pageCount} page{pageCount > 1 ? "s" : ""}
             </div>
 

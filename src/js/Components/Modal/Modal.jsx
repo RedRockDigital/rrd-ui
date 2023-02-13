@@ -1,6 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 
+import { useConfig } from "@/Hooks";
+
 /**
  * @function Modal
  * @param {JSX.Element} children
@@ -11,6 +13,8 @@ import PropTypes from "prop-types";
  * @constructor
  */
 const Modal = ({ children, className, size, position = "center" }) => {
+    const { getConfig } = useConfig();
+
     let containerClassName = null;
 
     switch (position) {
@@ -26,13 +30,13 @@ const Modal = ({ children, className, size, position = "center" }) => {
     }
 
     return (
-        <div className={`modal fixed w-full h-full top-0 left-0 flex z-50 ${containerClassName}`}>
-            <div className="modal-overlay absolute w-full h-full bg-gray-900 opacity-50" />
+        <div className={`${getConfig("theme.modal.container", "modal fixed w-full h-full top-0 left-0 flex z-50")} ${containerClassName}`}>
+            <div className={getConfig("theme.modal.overlay",  "modal-overlay absolute w-full h-full bg-gray-900 opacity-50")} />
 
             <div
                 className={`
-                    modal-container bg-white w-full ${size ?? "max-w-screen-sm"} flex flex-col
-                    max-h-full ${className} overflow-y-scroll shadow-lg z-50 overflow-y-visible rounded
+                    ${getConfig("theme.modal.default", "modal-container bg-white w-full flex flex-col max-h-full overflow-y-scroll shadow-lg z-50 overflow-y-visible rounded")}
+                    ${className} ${size ?? "max-w-screen-sm"}
                 `}
             >
                 {children}
